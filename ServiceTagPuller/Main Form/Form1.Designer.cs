@@ -28,16 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label6 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveCredentialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aDConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userPassStoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnResultsLbl = new System.Windows.Forms.Label();
-            this.cbsLogsTab = new System.Windows.Forms.TabControl();
+            this.mainTabsControl = new System.Windows.Forms.TabControl();
             this.onePCTab = new System.Windows.Forms.TabPage();
             this.softwareCB = new System.Windows.Forms.CheckBox();
             this.hddCB = new System.Windows.Forms.CheckBox();
@@ -58,6 +56,9 @@
             this.FindItbtn = new System.Windows.Forms.Button();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.multiPCTab = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.checkForLogsBtn = new System.Windows.Forms.Button();
             this.softwareCBMulti = new System.Windows.Forms.CheckBox();
             this.hddCBMulti = new System.Windows.Forms.CheckBox();
             this.currUserCBMulti = new System.Windows.Forms.CheckBox();
@@ -71,23 +72,13 @@
             this.getDetailsBtn = new System.Windows.Forms.Button();
             this.findMachineBtn = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.checkForLogsBtn = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.aboutLbl = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
-            this.cbsLogsTab.SuspendLayout();
+            this.mainTabsControl.SuspendLayout();
             this.onePCTab.SuspendLayout();
             this.multiPCTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 744);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(68, 15);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "Version 1.1";
             // 
             // menuStrip1
             // 
@@ -126,24 +117,17 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aDConnectionToolStripMenuItem,
             this.userPassStoreToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // aDConnectionToolStripMenuItem
-            // 
-            this.aDConnectionToolStripMenuItem.Name = "aDConnectionToolStripMenuItem";
-            this.aDConnectionToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.aDConnectionToolStripMenuItem.Text = "AD Connection";
-            this.aDConnectionToolStripMenuItem.Click += new System.EventHandler(this.aDConnectionToolStripMenuItem_Click);
             // 
             // userPassStoreToolStripMenuItem
             // 
             this.userPassStoreToolStripMenuItem.Name = "userPassStoreToolStripMenuItem";
             this.userPassStoreToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.userPassStoreToolStripMenuItem.Text = "User/Pass Store";
+            this.userPassStoreToolStripMenuItem.Click += new System.EventHandler(this.userPassStoreToolStripMenuItem_Click);
             // 
             // returnResultsLbl
             // 
@@ -155,15 +139,16 @@
             this.returnResultsLbl.Size = new System.Drawing.Size(0, 18);
             this.returnResultsLbl.TabIndex = 23;
             // 
-            // cbsLogsTab
+            // mainTabsControl
             // 
-            this.cbsLogsTab.Controls.Add(this.onePCTab);
-            this.cbsLogsTab.Controls.Add(this.multiPCTab);
-            this.cbsLogsTab.Location = new System.Drawing.Point(12, 27);
-            this.cbsLogsTab.Name = "cbsLogsTab";
-            this.cbsLogsTab.SelectedIndex = 0;
-            this.cbsLogsTab.Size = new System.Drawing.Size(1134, 703);
-            this.cbsLogsTab.TabIndex = 26;
+            this.mainTabsControl.Controls.Add(this.onePCTab);
+            this.mainTabsControl.Controls.Add(this.multiPCTab);
+            this.mainTabsControl.Location = new System.Drawing.Point(12, 38);
+            this.mainTabsControl.Name = "mainTabsControl";
+            this.mainTabsControl.SelectedIndex = 0;
+            this.mainTabsControl.Size = new System.Drawing.Size(1134, 691);
+            this.mainTabsControl.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
+            this.mainTabsControl.TabIndex = 26;
             // 
             // onePCTab
             // 
@@ -188,7 +173,7 @@
             this.onePCTab.Location = new System.Drawing.Point(4, 24);
             this.onePCTab.Name = "onePCTab";
             this.onePCTab.Padding = new System.Windows.Forms.Padding(3);
-            this.onePCTab.Size = new System.Drawing.Size(1126, 675);
+            this.onePCTab.Size = new System.Drawing.Size(1126, 663);
             this.onePCTab.TabIndex = 0;
             this.onePCTab.Text = "Single PC";
             this.onePCTab.UseVisualStyleBackColor = true;
@@ -360,6 +345,7 @@
             this.compNameSearchTB.Name = "compNameSearchTB";
             this.compNameSearchTB.Size = new System.Drawing.Size(200, 24);
             this.compNameSearchTB.TabIndex = 30;
+            this.compNameSearchTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.compNameSearchTB_KeyPress);
             // 
             // label1
             // 
@@ -384,7 +370,6 @@
             // 
             // webBrowser1
             // 
-            this.webBrowser1.AllowNavigation = false;
             this.webBrowser1.Location = new System.Drawing.Point(458, 8);
             this.webBrowser1.Margin = new System.Windows.Forms.Padding(8);
             this.webBrowser1.MaximumSize = new System.Drawing.Size(1000, 1000);
@@ -395,6 +380,7 @@
             // 
             // multiPCTab
             // 
+            this.multiPCTab.Controls.Add(this.label10);
             this.multiPCTab.Controls.Add(this.textBox1);
             this.multiPCTab.Controls.Add(this.checkForLogsBtn);
             this.multiPCTab.Controls.Add(this.softwareCBMulti);
@@ -413,16 +399,42 @@
             this.multiPCTab.Location = new System.Drawing.Point(4, 24);
             this.multiPCTab.Name = "multiPCTab";
             this.multiPCTab.Padding = new System.Windows.Forms.Padding(3);
-            this.multiPCTab.Size = new System.Drawing.Size(1126, 675);
+            this.multiPCTab.Size = new System.Drawing.Size(1126, 663);
             this.multiPCTab.TabIndex = 1;
             this.multiPCTab.Text = "Multiple PCs";
             this.multiPCTab.UseVisualStyleBackColor = true;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(12, 13);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(299, 29);
+            this.label10.TabIndex = 59;
+            this.label10.Text = "Multiple Machine Details";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(363, 13);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(757, 29);
+            this.textBox1.TabIndex = 58;
+            // 
+            // checkForLogsBtn
+            // 
+            this.checkForLogsBtn.Location = new System.Drawing.Point(228, 562);
+            this.checkForLogsBtn.Name = "checkForLogsBtn";
+            this.checkForLogsBtn.Size = new System.Drawing.Size(100, 33);
+            this.checkForLogsBtn.TabIndex = 57;
+            this.checkForLogsBtn.Text = "Check For Logs";
+            this.checkForLogsBtn.UseVisualStyleBackColor = true;
+            this.checkForLogsBtn.Visible = false;
+            // 
             // softwareCBMulti
             // 
             this.softwareCBMulti.AutoSize = true;
-            this.softwareCBMulti.Checked = true;
-            this.softwareCBMulti.CheckState = System.Windows.Forms.CheckState.Checked;
             this.softwareCBMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.softwareCBMulti.Location = new System.Drawing.Point(228, 288);
             this.softwareCBMulti.Name = "softwareCBMulti";
@@ -516,7 +528,7 @@
             this.listBox1.Location = new System.Drawing.Point(11, 120);
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBox1.Size = new System.Drawing.Size(211, 514);
+            this.listBox1.Size = new System.Drawing.Size(211, 499);
             this.listBox1.TabIndex = 48;
             // 
             // selectAllBtn
@@ -536,10 +548,10 @@
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(363, 339);
+            this.dataGridView1.Location = new System.Drawing.Point(363, 48);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(757, 330);
+            this.dataGridView1.Size = new System.Drawing.Size(757, 621);
             this.dataGridView1.TabIndex = 46;
             // 
             // getDetailsBtn
@@ -568,26 +580,19 @@
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(6, 6);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(299, 29);
+            this.label8.Size = new System.Drawing.Size(0, 29);
             this.label8.TabIndex = 41;
-            this.label8.Text = "Multiple Machine Details";
             // 
-            // checkForLogsBtn
+            // aboutLbl
             // 
-            this.checkForLogsBtn.Location = new System.Drawing.Point(228, 562);
-            this.checkForLogsBtn.Name = "checkForLogsBtn";
-            this.checkForLogsBtn.Size = new System.Drawing.Size(100, 33);
-            this.checkForLogsBtn.TabIndex = 57;
-            this.checkForLogsBtn.Text = "Check For Logs";
-            this.checkForLogsBtn.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(363, 13);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(757, 320);
-            this.textBox1.TabIndex = 58;
+            this.aboutLbl.AutoSize = true;
+            this.aboutLbl.BackColor = System.Drawing.Color.White;
+            this.aboutLbl.Location = new System.Drawing.Point(1122, 4);
+            this.aboutLbl.Name = "aboutLbl";
+            this.aboutLbl.Size = new System.Drawing.Size(32, 15);
+            this.aboutLbl.TabIndex = 27;
+            this.aboutLbl.Text = "v.2.1";
+            this.aboutLbl.Click += new System.EventHandler(this.aboutLbl_Click);
             // 
             // Form1
             // 
@@ -595,19 +600,22 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.ClientSize = new System.Drawing.Size(1158, 741);
-            this.Controls.Add(this.cbsLogsTab);
+            this.Controls.Add(this.aboutLbl);
+            this.Controls.Add(this.mainTabsControl);
             this.Controls.Add(this.returnResultsLbl);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximumSize = new System.Drawing.Size(1920, 1080);
+            this.MinimumSize = new System.Drawing.Size(500, 500);
             this.Name = "Form1";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Get PC Info";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.cbsLogsTab.ResumeLayout(false);
+            this.mainTabsControl.ResumeLayout(false);
             this.onePCTab.ResumeLayout(false);
             this.onePCTab.PerformLayout();
             this.multiPCTab.ResumeLayout(false);
@@ -619,16 +627,14 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveCredentialsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Label returnResultsLbl;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aDConnectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem userPassStoreToolStripMenuItem;
-        private System.Windows.Forms.TabControl cbsLogsTab;
+        private System.Windows.Forms.TabControl mainTabsControl;
         private System.Windows.Forms.TabPage onePCTab;
         private System.Windows.Forms.CheckBox hddCB;
         private System.Windows.Forms.Label label7;
@@ -647,23 +653,25 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button FindItbtn;
         private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.CheckBox softwareCB;
+        private System.Windows.Forms.Label aboutLbl;
         private System.Windows.Forms.TabPage multiPCTab;
-        private System.Windows.Forms.Button findMachineBtn;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button getDetailsBtn;
-        private System.Windows.Forms.Button selectAllBtn;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button checkForLogsBtn;
+        private System.Windows.Forms.CheckBox softwareCBMulti;
         private System.Windows.Forms.CheckBox hddCBMulti;
         private System.Windows.Forms.CheckBox currUserCBMulti;
         private System.Windows.Forms.CheckBox osCBMulti;
         private System.Windows.Forms.CheckBox procCBMulti;
         private System.Windows.Forms.CheckBox ramCBMulti;
         private System.Windows.Forms.CheckBox serialNumberCBMulti;
-        private System.Windows.Forms.CheckBox softwareCBMulti;
-        private System.Windows.Forms.CheckBox softwareCB;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button checkForLogsBtn;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button selectAllBtn;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button getDetailsBtn;
+        private System.Windows.Forms.Button findMachineBtn;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label10;
     }
 }
 

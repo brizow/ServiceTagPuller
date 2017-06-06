@@ -4,36 +4,27 @@ using System.IO;
 using System.Windows.Forms;
 using System.DirectoryServices;
 using System.Linq;
-using System.Diagnostics;
+using ServiceTagPuller.Properties;
 
 namespace ServiceTagPuller
 {
     public partial class Form1 : Form
     {
-        //declare variables
-        string user;
-        string pass;
-        string comp;
-        string command;
-        string osInfo;
-
-        //Timer countTimer = new Timer();
-        //int returnTime;
         public Form1()
         {
             InitializeComponent();
+
             //push saved settings in to place
-            adminUserNameTB.Text = ServiceTagPuller.Properties.Settings.Default.UserName;
-            adminPassTB.Text = ServiceTagPuller.Properties.Settings.Default.Password;
+            adminUserNameTB.Text = Settings.Default.UserName;
+            adminPassTB.Text = Settings.Default.Password;
+
             //get HTML text
             string curDir = Directory.GetCurrentDirectory();
             string browsercontent = File.ReadAllText(curDir + "/ResultsBody.html");
+
             //intialize default browser control
             webBrowser1.Navigate("about:blank");
             webBrowser1.Document.Write(browsercontent);
-
-            //turn on AutColumnGeneration
-            dataGridView1.AutoGenerateColumns = true;
         }
 
         #region SinglePCTab
@@ -52,99 +43,138 @@ namespace ServiceTagPuller
             //FindItbtn.Enabled = false;
 
             //fill variables them
-            user = adminUserNameTB.Text;
-            pass = adminPassTB.Text;
-            comp = @"""" + compNameSearchTB.Text + @"""";
+            string user = adminUserNameTB.Text;
+            string pass = adminPassTB.Text;
+            string comp = @"""" + compNameSearchTB.Text + @"""";
             getInfoSingle(user, pass, comp);
+        }
+        private void compNameSearchTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                string user = adminUserNameTB.Text;
+                string pass = adminPassTB.Text;
+                string comp = @"""" + compNameSearchTB.Text + @"""";
+                getInfoSingle(user, pass, comp);
+            }
         }
 
         private void getInfoSingle(string username, string password, string computer)
         {
-            if (compNameSearchTB.Text != "")
+            string command;
+
+            if (compNameSearchTB.Text != "")  //you cannot search your own computer with this...
             {
                 try
                 {
                     OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
 
                     //see if the machine is up
-                    command = "ping " + comp;
+                    command = "ping " + computer;
                     var isItUp = openCommandPrompt.SendCommand(command);
 
                     if (isItUp.Contains("Request timed out."))
                     {
                         webBrowser1.Document.GetElementById("divSerial").InnerHtml = "This computer does not appear to be on.";
+                        ClearResults();
                     }
                     else if (isItUp.Contains("Ping request could not find host"))
                     {
                         webBrowser1.Document.GetElementById("divSerial").InnerHtml = "This computer name does not exist.";
+                        ClearResults();
                     }
                     else
                     {
                         try
                         {
                             if (serialNumCB.Checked)
-                            { 
+                            {
                                 //find serial number command
                                 command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " csproduct get vendor, name, identifyingnumber /format:htable";
                                 ///format:htable - Displays a pretty preformatted table for us.
                                 //put it in the browser1 control in the divSerial section
                                 webBrowser1.Document.GetElementById("divSerial").InnerHtml = openCommandPrompt.SendCommand(command);
                             }
+                            else
+                            {
+                                webBrowser1.Document.GetElementById("divSerial").InnerHtml = "";
+                            }
 
                             if (procCB.Checked)
                             {
-                                //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
                                 command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " cpu get Name /format:htable";
                                 webBrowser1.Document.GetElementById("divCPU").InnerHtml = openCommandPrompt.SendCommand(command);
+                            }
+                            else
+                            {
+                                webBrowser1.Document.GetElementById("divCPU").InnerHtml = "";
                             }
 
                             if (ramCB.Checked)
                             {
-                                //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
                                 command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " memorychip get capacity /format:htable";
                                 webBrowser1.Document.GetElementById("divRAM").InnerHtml = openCommandPrompt.SendCommand(command);
                             }
+                            else
+                            {
+                                webBrowser1.Document.GetElementById("divRAM").InnerHtml = "";
+                            }
+
 
                             if (hddCB.Checked)
                             {
-                                //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
                                 command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " diskdrive get caption /format:htable";
                                 webBrowser1.Document.GetElementById("divHDD").InnerHtml = openCommandPrompt.SendCommand(command);
+                            }
+                            else
+                            {
+                                webBrowser1.Document.GetElementById("divHDD").InnerHtml = "";
                             }
 
                             if (osInfoCB.Checked)
                             {
-                                //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
                                 command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " os get SerialNumber, OSArchitecture, Caption /format:htable";
                                 webBrowser1.Document.GetElementById("divOS").InnerHtml = openCommandPrompt.SendCommand(command);
-                                osInfo = openCommandPrompt.SendCommand(command);
                             }
+                            else
+                            {
+                                webBrowser1.Document.GetElementById("divOS").InnerHtml = "";
+                            }
+
                             if (currUserCB.Checked)
                             {
-                                //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
                                 command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " computersystem get UserName, Name /format:htable";
                                 webBrowser1.Document.GetElementById("divUser").InnerHtml = openCommandPrompt.SendCommand(command);
                             }
+                            else
+                            {
+                                webBrowser1.Document.GetElementById("divUser").InnerHtml = "";
+                            }
+
                             if (softwareCB.Checked)
                             {
-                                string filter = "\"Name like '%ESET%'\"";
-                                string filter2 = "\"Name like '%Adobe%'\"";
+                                string filter = "\"Name like '%Adobe%'\"";
+                                string filter2 = "\"Name like '%ESET%'\"";
                                 string filter3 = "\"Name like '%Office%'\"";
 
-                                //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
                                 command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter + " get Name, Version /format:htable";
                                 webBrowser1.Document.GetElementById("divAntiVirus").InnerHtml = openCommandPrompt.SendCommand(command);
-                                //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
+
                                 command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter2 + " get Name, Version /format:htable";
                                 webBrowser1.Document.GetElementById("divAdobe").InnerHtml = openCommandPrompt.SendCommand(command);
-                                //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
+
                                 command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter3 + " get Name, Version /format:htable";
                                 webBrowser1.Document.GetElementById("divOffice").InnerHtml = openCommandPrompt.SendCommand(command);
+                            }
+                            else
+                            {
+                                webBrowser1.Document.GetElementById("divAntiVirus").InnerHtml = "";
+                                webBrowser1.Document.GetElementById("divAdobe").InnerHtml = "";
+                                webBrowser1.Document.GetElementById("divOffice").InnerHtml = "";
                             }
                         }
                         catch (Exception ex)
                         {
-                            //countTimer.Stop();
                             webBrowser1.Document.GetElementById("divSerial").InnerHtml = ex.ToString();
                             returnResultsLbl.Text = "";
                             return;
@@ -183,9 +213,16 @@ namespace ServiceTagPuller
             this.Close();
         }
 
-        private void aDConnectionToolStripMenuItem_Click(object sender, EventArgs e)
+        private void userPassStoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Form settingsForms = new SettingsForm();
+            settingsForms.Show();
+        }
 
+        private void aboutLbl_Click(object sender, EventArgs e)
+        {
+            VersionForm ab = new VersionForm();
+            ab.Show();
         }
 
         #endregion
@@ -194,6 +231,8 @@ namespace ServiceTagPuller
 
         private void findMachineBtn_Click(object sender, EventArgs e)
         {
+            //remove all the items from the list then readd
+            listBox1.Items.Clear();
             getMachinesFromAD();
         }
 
@@ -208,14 +247,15 @@ namespace ServiceTagPuller
 
         private void checkForLogsBtn_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void getDetailsBtn_Click(object sender, EventArgs e)
         {
-            getInfoMulti("bwadmin", "TallGiraffe_2");
+            getInfoMulti(Settings.Default.UserName, Settings.Default.Password);
         }
 
+        
 
 
         #region MyMethods
@@ -240,39 +280,39 @@ namespace ServiceTagPuller
 
         private void returnMachineDetails()
         {
-            IList<string> returnedResults = new List<string>();
+            //IList<string> returnedResults = new List<string>();
 
-            foreach (var item in listBox1.SelectedItems)
-            {
-                comp = item.ToString();   /*.TrimEnd('r', 'n', '/');*/
-                try
-                {
-                    OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
+            //foreach (var item in listBox1.SelectedItems)
+            //{
+            //    comp = item.ToString();   /*.TrimEnd('r', 'n', '/');*/
+            //    try
+            //    {
+            //        OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
 
-                    //see if the machine is up
-                    command = "ping " + comp;
-                    var isItUp = openCommandPrompt.SendCommand(command);
+            //        //see if the machine is up
+            //        command = "ping " + comp;
+            //        var isItUp = openCommandPrompt.SendCommand(command);
 
-                    if (isItUp.Contains("Request timed out."))
-                    {
-                        returnedResults.Add(comp + ": This machine appears to be off.");
-                    }
-                    else if (isItUp.Contains("Ping request could not find host"))
-                    {
-                        returnedResults.Add(comp + ": This computer does not exist.");
-                    }
-                    else
-                    {
-                        returnedResults.Add(comp + ": This computer is up.");
-                    }
-                }
-                catch
-                {
+            //        if (isItUp.Contains("Request timed out."))
+            //        {
+            //            returnedResults.Add(comp + ": This machine appears to be off.");
+            //        }
+            //        else if (isItUp.Contains("Ping request could not find host"))
+            //        {
+            //            returnedResults.Add(comp + ": This computer does not exist.");
+            //        }
+            //        else
+            //        {
+            //            returnedResults.Add(comp + ": This computer is up.");
+            //        }
+            //    }
+            //    catch
+            //    {
 
-                }
-            }
+            //    }
+            //}
             //add items to the grid view
-            dataGridView1.DataSource = returnedResults.Select(x => new { Value = x }).ToList();
+            //dataGridView1.DataSource = returnedResults.Select(x => new { Value = x }).ToList();
 
 
             #endregion
@@ -298,6 +338,7 @@ namespace ServiceTagPuller
 
         private void getInfoMulti(string username, string password)
         {
+            string command;
             IList<string> returnedResults = new List<string>();
 
             if (listBox1.SelectedItems.Count > 0)
@@ -305,22 +346,22 @@ namespace ServiceTagPuller
                 for (int i = 0; i < listBox1.SelectedItems.Count; i++)
                     try
                     {
-                        string computer = @"""" + listBox1.SelectedItem.ToString() + @"""";
+                        string computer = @"""" + listBox1.SelectedItems[i].ToString() + @"""";
 
-                         OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
+                        OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
 
                         //see if the machine is up
-                        command = "ping " + comp;
+                        command = "ping " + computer;
 
                         var isItUp = openCommandPrompt.SendCommand(command);
 
                         if (isItUp.Contains("Request timed out."))
                         {
-                            returnedResults.Add(comp + ": This machine appears to be off.");
+                            returnedResults.Add(computer + ": This machine appears to be off.");
                         }
                         else if (isItUp.Contains("Ping request could not find host"))
                         {
-                            returnedResults.Add(comp + ": This computer does not exist.");
+                            returnedResults.Add(computer + ": This computer does not exist.");
                         }
                         else
                         {
@@ -328,9 +369,9 @@ namespace ServiceTagPuller
                             {
                                 if (serialNumberCBMulti.Checked)
                                 {
-                                    //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
+
                                     //find serial number command
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " csproduct get vendor, name, identifyingnumber /format:list";
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " csproduct get vendor, name, identifyingnumber /format:table";
                                     ///format:htable - Displays a pretty preformatted table for us.
                                     //put it in the browser1 control in the divSerial section
                                     returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
@@ -338,59 +379,51 @@ namespace ServiceTagPuller
 
                                 if (procCBMulti.Checked)
                                 {
-                                    //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " cpu get Name /format:list";
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " cpu get Name /format:table";
                                     returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
                                 }
 
                                 if (ramCBMulti.Checked)
                                 {
-                                    //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " memorychip get capacity /format:value";
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " memorychip get capacity /format:table";
                                     returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
                                 }
 
                                 if (hddCBMulti.Checked)
                                 {
-                                    //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " diskdrive get caption /format:value";
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " diskdrive get caption /format:table";
                                     returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
                                 }
 
                                 if (osCBMulti.Checked)
                                 {
-                                    //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " os get SerialNumber, OSArchitecture, Caption /format:value";
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " os get SerialNumber, OSArchitecture, Caption /format:table";
                                     returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
-                                    osInfo = openCommandPrompt.SendCommand(command);
                                 }
                                 if (currUserCBMulti.Checked)
                                 {
-                                    //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " computersystem get UserName, Name /format:value";
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " computersystem get UserName, Name /format:table";
                                     returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
                                 }
                                 if (softwareCBMulti.Checked)
                                 {
-                                    string filter = "\"Name like '%Eset%'\"";
+                                    string filter = "\"Name like '%ESET%'\"";
                                     string filter2 = "\"Name like '%Adobe%'\"";
                                     string filter3 = "\"Name like '%Office%'\"";
-                                    //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " wmic product where" + filter + "get Name, Version";
+
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter + " get Name, Version /format:table";
                                     returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
-                                    //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " wmic product where" + filter2 + "get Name, Version";
+
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter2 + " get Name, Version /format:table";
                                     returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
-                                    //OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " wmic product where" + filter3 + "get Name, Version";
+
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter3 + " get Name, Version /format:table";
                                     returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
                                 }
-                                
+
                             }
                             catch (Exception ex)
                             {
-                                //countTimer.Stop();
-                                //returnResultsLbl.Text = "";
                                 return;
                             }
                         }
@@ -405,8 +438,61 @@ namespace ServiceTagPuller
             }
         }
 
+        private void CSVExport(string username, string password)
+        {
+            //List<string> returnedResults = new List<string>();
+
+            //List<string> commands = new List<string>();
+            //commands.Add("wmic /user:" + username + " /password:" + password + " /node:" + computer + " csproduct get vendor, name, identifyingnumber /format:table");
+            //commands.Add("wmic /user:" + username + " /password:" + password + " /node:" + computer + " cpu get Name /format:table");
+            //command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " memorychip get capacity /format:table";
+            //command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " diskdrive get caption /format:table";
+            //command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " os get SerialNumber, OSArchitecture, Caption /format:table";
+            //command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " computersystem get UserName, Name /format:table";
+
+            //command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter + " get Name, Version /format:table";
+            //command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter2 + " get Name, Version /format:table";
+            //command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter3 + " get Name, Version /format:table";)
+
+            //if (listBox1.SelectedItems.Count > 0)
+            //{
+            //    for (int i = 0; i < listBox1.SelectedItems.Count; i++)
+            //        try
+            //        {
+            //            string computer = @"""" + listBox1.SelectedItems[i].ToString() + @"""";
+
+            //            OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
+
+            //            string filter = "\"Name like '%ESET%'\"";
+            //            string filter2 = "\"Name like '%Adobe%'\"";
+            //            string filter3 = "\"Name like '%Office%'\"";
+
+                        
+            //        }
+            //        catch
+            //        {
+
+            //        }
+            //}
+        }
+
+        private void ClearResults()
+        {
+            //clear the divs all except the SerialDiv for errors
+            //webBrowser1.Document.GetElementById("divSerial").InnerHtml = "";
+            webBrowser1.Document.GetElementById("divCPU").InnerHtml = "";
+            webBrowser1.Document.GetElementById("divRAM").InnerHtml = "";
+            webBrowser1.Document.GetElementById("divHDD").InnerHtml = "";
+            webBrowser1.Document.GetElementById("divOS").InnerHtml = "";
+            webBrowser1.Document.GetElementById("divOS").InnerHtml = "";
+            webBrowser1.Document.GetElementById("divUser").InnerHtml = "";
+            webBrowser1.Document.GetElementById("divAntiVirus").InnerHtml = "";
+            webBrowser1.Document.GetElementById("divAdobe").InnerHtml = "";
+            webBrowser1.Document.GetElementById("divOffice").InnerHtml = "";
+        }
+
         #endregion
 
-
+        
     }
 }
