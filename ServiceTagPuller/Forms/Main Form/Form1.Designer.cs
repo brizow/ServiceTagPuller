@@ -57,7 +57,6 @@
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.multiPCTab = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.checkForLogsBtn = new System.Windows.Forms.Button();
             this.softwareCBMulti = new System.Windows.Forms.CheckBox();
             this.hddCBMulti = new System.Windows.Forms.CheckBox();
@@ -181,8 +180,6 @@
             // softwareCB
             // 
             this.softwareCB.AutoSize = true;
-            this.softwareCB.Checked = true;
-            this.softwareCB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.softwareCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.softwareCB.Location = new System.Drawing.Point(324, 260);
             this.softwareCB.Name = "softwareCB";
@@ -381,7 +378,6 @@
             // multiPCTab
             // 
             this.multiPCTab.Controls.Add(this.label10);
-            this.multiPCTab.Controls.Add(this.textBox1);
             this.multiPCTab.Controls.Add(this.checkForLogsBtn);
             this.multiPCTab.Controls.Add(this.softwareCBMulti);
             this.multiPCTab.Controls.Add(this.hddCBMulti);
@@ -414,14 +410,6 @@
             this.label10.TabIndex = 59;
             this.label10.Text = "Multiple Machine Details";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(363, 13);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(757, 29);
-            this.textBox1.TabIndex = 58;
-            // 
             // checkForLogsBtn
             // 
             this.checkForLogsBtn.Location = new System.Drawing.Point(228, 562);
@@ -449,7 +437,7 @@
             this.hddCBMulti.Checked = true;
             this.hddCBMulti.CheckState = System.Windows.Forms.CheckState.Checked;
             this.hddCBMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hddCBMulti.Location = new System.Drawing.Point(228, 204);
+            this.hddCBMulti.Location = new System.Drawing.Point(228, 232);
             this.hddCBMulti.Name = "hddCBMulti";
             this.hddCBMulti.Size = new System.Drawing.Size(60, 22);
             this.hddCBMulti.TabIndex = 54;
@@ -462,7 +450,7 @@
             this.currUserCBMulti.Checked = true;
             this.currUserCBMulti.CheckState = System.Windows.Forms.CheckState.Checked;
             this.currUserCBMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currUserCBMulti.Location = new System.Drawing.Point(228, 260);
+            this.currUserCBMulti.Location = new System.Drawing.Point(228, 120);
             this.currUserCBMulti.Name = "currUserCBMulti";
             this.currUserCBMulti.Size = new System.Drawing.Size(112, 22);
             this.currUserCBMulti.TabIndex = 53;
@@ -475,7 +463,7 @@
             this.osCBMulti.Checked = true;
             this.osCBMulti.CheckState = System.Windows.Forms.CheckState.Checked;
             this.osCBMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.osCBMulti.Location = new System.Drawing.Point(228, 232);
+            this.osCBMulti.Location = new System.Drawing.Point(228, 260);
             this.osCBMulti.Name = "osCBMulti";
             this.osCBMulti.Size = new System.Drawing.Size(77, 22);
             this.osCBMulti.TabIndex = 52;
@@ -488,7 +476,7 @@
             this.procCBMulti.Checked = true;
             this.procCBMulti.CheckState = System.Windows.Forms.CheckState.Checked;
             this.procCBMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.procCBMulti.Location = new System.Drawing.Point(229, 176);
+            this.procCBMulti.Location = new System.Drawing.Point(229, 204);
             this.procCBMulti.Name = "procCBMulti";
             this.procCBMulti.Size = new System.Drawing.Size(59, 22);
             this.procCBMulti.TabIndex = 51;
@@ -501,7 +489,7 @@
             this.ramCBMulti.Checked = true;
             this.ramCBMulti.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ramCBMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ramCBMulti.Location = new System.Drawing.Point(228, 148);
+            this.ramCBMulti.Location = new System.Drawing.Point(228, 176);
             this.ramCBMulti.Name = "ramCBMulti";
             this.ramCBMulti.Size = new System.Drawing.Size(60, 22);
             this.ramCBMulti.TabIndex = 50;
@@ -514,7 +502,7 @@
             this.serialNumberCBMulti.Checked = true;
             this.serialNumberCBMulti.CheckState = System.Windows.Forms.CheckState.Checked;
             this.serialNumberCBMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.serialNumberCBMulti.Location = new System.Drawing.Point(228, 120);
+            this.serialNumberCBMulti.Location = new System.Drawing.Point(228, 148);
             this.serialNumberCBMulti.Name = "serialNumberCBMulti";
             this.serialNumberCBMulti.Size = new System.Drawing.Size(121, 22);
             this.serialNumberCBMulti.TabIndex = 49;
@@ -548,10 +536,10 @@
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(363, 48);
+            this.dataGridView1.Location = new System.Drawing.Point(363, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(757, 621);
+            this.dataGridView1.Size = new System.Drawing.Size(757, 656);
             this.dataGridView1.TabIndex = 46;
             // 
             // getDetailsBtn
@@ -656,7 +644,6 @@
         private System.Windows.Forms.CheckBox softwareCB;
         private System.Windows.Forms.Label aboutLbl;
         private System.Windows.Forms.TabPage multiPCTab;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button checkForLogsBtn;
         private System.Windows.Forms.CheckBox softwareCBMulti;
         private System.Windows.Forms.CheckBox hddCBMulti;

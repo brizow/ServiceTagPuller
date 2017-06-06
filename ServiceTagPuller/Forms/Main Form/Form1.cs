@@ -87,6 +87,16 @@ namespace ServiceTagPuller
                     {
                         try
                         {
+                            if (currUserCB.Checked)
+                            {
+                                command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " computersystem get UserName, Name /format:htable";
+                                webBrowser1.Document.GetElementById("divUser").InnerHtml = openCommandPrompt.SendCommand(command);
+                            }
+                            else
+                            {
+                                webBrowser1.Document.GetElementById("divUser").InnerHtml = "";
+                            }
+
                             if (serialNumCB.Checked)
                             {
                                 //find serial number command
@@ -139,16 +149,6 @@ namespace ServiceTagPuller
                             else
                             {
                                 webBrowser1.Document.GetElementById("divOS").InnerHtml = "";
-                            }
-
-                            if (currUserCB.Checked)
-                            {
-                                command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " computersystem get UserName, Name /format:htable";
-                                webBrowser1.Document.GetElementById("divUser").InnerHtml = openCommandPrompt.SendCommand(command);
-                            }
-                            else
-                            {
-                                webBrowser1.Document.GetElementById("divUser").InnerHtml = "";
                             }
 
                             if (softwareCB.Checked)
@@ -343,10 +343,17 @@ namespace ServiceTagPuller
 
             if (listBox1.SelectedItems.Count > 0)
             {
-                for (int i = 0; i < listBox1.SelectedItems.Count; i++)
+                int i = 0;
+                //for each computer in the list
+                foreach  (var pc in listBox1.SelectedItems)
                     try
                     {
-                        string computer = @"""" + listBox1.SelectedItems[i].ToString() + @"""";
+                        if (i > 0)
+                        {
+                            returnedResults.Add("");
+                        }
+                        //pc name
+                        string computer = @"""" + pc + @"""";
 
                         OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
 
@@ -367,43 +374,42 @@ namespace ServiceTagPuller
                         {
                             try
                             {
+                                if (currUserCBMulti.Checked)
+                                {
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " computersystem get UserName, Name /format:table";
+                                    returnedResults.Add(openCommandPrompt.SendCommand(command));
+                                }
                                 if (serialNumberCBMulti.Checked)
                                 {
-
                                     //find serial number command
                                     command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " csproduct get vendor, name, identifyingnumber /format:table";
                                     ///format:htable - Displays a pretty preformatted table for us.
                                     //put it in the browser1 control in the divSerial section
-                                    returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
+                                    returnedResults.Add(openCommandPrompt.SendCommand(command));
                                 }
 
                                 if (procCBMulti.Checked)
                                 {
                                     command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " cpu get Name /format:table";
-                                    returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
+                                    returnedResults.Add(openCommandPrompt.SendCommand(command));
                                 }
 
                                 if (ramCBMulti.Checked)
                                 {
                                     command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " memorychip get capacity /format:table";
-                                    returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
+                                    returnedResults.Add(openCommandPrompt.SendCommand(command));
                                 }
 
                                 if (hddCBMulti.Checked)
                                 {
                                     command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " diskdrive get caption /format:table";
-                                    returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
+                                    returnedResults.Add(openCommandPrompt.SendCommand(command));
                                 }
 
                                 if (osCBMulti.Checked)
                                 {
                                     command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " os get SerialNumber, OSArchitecture, Caption /format:table";
-                                    returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
-                                }
-                                if (currUserCBMulti.Checked)
-                                {
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " computersystem get UserName, Name /format:table";
-                                    returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
+                                    returnedResults.Add(openCommandPrompt.SendCommand(command));
                                 }
                                 if (softwareCBMulti.Checked)
                                 {
@@ -412,13 +418,13 @@ namespace ServiceTagPuller
                                     string filter3 = "\"Name like '%Office%'\"";
 
                                     command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter + " get Name, Version /format:table";
-                                    returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
+                                    returnedResults.Add(openCommandPrompt.SendCommand(command));
 
                                     command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter2 + " get Name, Version /format:table";
-                                    returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
+                                    returnedResults.Add(openCommandPrompt.SendCommand(command));
 
                                     command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter3 + " get Name, Version /format:table";
-                                    returnedResults.Insert(i, openCommandPrompt.SendCommand(command));
+                                    returnedResults.Add(openCommandPrompt.SendCommand(command));
                                 }
 
                             }
@@ -427,6 +433,8 @@ namespace ServiceTagPuller
                                 return;
                             }
                         }
+                        //increment our count
+                        i++;
                     }
                     catch (Exception ex)
                     {
