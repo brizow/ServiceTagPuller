@@ -37,6 +37,8 @@
             this.returnResultsLbl = new System.Windows.Forms.Label();
             this.mainTabsControl = new System.Windows.Forms.TabControl();
             this.onePCTab = new System.Windows.Forms.TabPage();
+            this.officeCB = new System.Windows.Forms.CheckBox();
+            this.esetCB = new System.Windows.Forms.CheckBox();
             this.adobeCB = new System.Windows.Forms.CheckBox();
             this.hddCB = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -56,8 +58,8 @@
             this.FindItbtn = new System.Windows.Forms.Button();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.multiPCTab = new System.Windows.Forms.TabPage();
+            this.errorLbl = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.checkForLogsBtn = new System.Windows.Forms.Button();
             this.softwareCBMulti = new System.Windows.Forms.CheckBox();
             this.hddCBMulti = new System.Windows.Forms.CheckBox();
             this.currUserCBMulti = new System.Windows.Forms.CheckBox();
@@ -72,9 +74,7 @@
             this.findMachineBtn = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.aboutLbl = new System.Windows.Forms.Label();
-            this.esetCB = new System.Windows.Forms.CheckBox();
-            this.officeCB = new System.Windows.Forms.CheckBox();
-            this.errorLbl = new System.Windows.Forms.Label();
+            this.exportBtn = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.mainTabsControl.SuspendLayout();
             this.onePCTab.SuspendLayout();
@@ -181,6 +181,28 @@
             this.onePCTab.TabIndex = 0;
             this.onePCTab.Text = "Single PC";
             this.onePCTab.UseVisualStyleBackColor = true;
+            // 
+            // officeCB
+            // 
+            this.officeCB.AutoSize = true;
+            this.officeCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.officeCB.Location = new System.Drawing.Point(167, 293);
+            this.officeCB.Name = "officeCB";
+            this.officeCB.Size = new System.Drawing.Size(66, 22);
+            this.officeCB.TabIndex = 59;
+            this.officeCB.Text = "Office";
+            this.officeCB.UseVisualStyleBackColor = true;
+            // 
+            // esetCB
+            // 
+            this.esetCB.AutoSize = true;
+            this.esetCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.esetCB.Location = new System.Drawing.Point(91, 293);
+            this.esetCB.Name = "esetCB";
+            this.esetCB.Size = new System.Drawing.Size(66, 22);
+            this.esetCB.TabIndex = 58;
+            this.esetCB.Text = "ESET";
+            this.esetCB.UseVisualStyleBackColor = true;
             // 
             // adobeCB
             // 
@@ -384,7 +406,7 @@
             // 
             this.multiPCTab.Controls.Add(this.errorLbl);
             this.multiPCTab.Controls.Add(this.label10);
-            this.multiPCTab.Controls.Add(this.checkForLogsBtn);
+            this.multiPCTab.Controls.Add(this.exportBtn);
             this.multiPCTab.Controls.Add(this.softwareCBMulti);
             this.multiPCTab.Controls.Add(this.hddCBMulti);
             this.multiPCTab.Controls.Add(this.currUserCBMulti);
@@ -406,6 +428,14 @@
             this.multiPCTab.Text = "Multiple PCs";
             this.multiPCTab.UseVisualStyleBackColor = true;
             // 
+            // errorLbl
+            // 
+            this.errorLbl.AutoSize = true;
+            this.errorLbl.Location = new System.Drawing.Point(118, 60);
+            this.errorLbl.Name = "errorLbl";
+            this.errorLbl.Size = new System.Drawing.Size(0, 15);
+            this.errorLbl.TabIndex = 60;
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -415,16 +445,6 @@
             this.label10.Size = new System.Drawing.Size(299, 29);
             this.label10.TabIndex = 59;
             this.label10.Text = "Multiple Machine Details";
-            // 
-            // checkForLogsBtn
-            // 
-            this.checkForLogsBtn.Location = new System.Drawing.Point(228, 562);
-            this.checkForLogsBtn.Name = "checkForLogsBtn";
-            this.checkForLogsBtn.Size = new System.Drawing.Size(100, 33);
-            this.checkForLogsBtn.TabIndex = 57;
-            this.checkForLogsBtn.Text = "Check For Logs";
-            this.checkForLogsBtn.UseVisualStyleBackColor = true;
-            this.checkForLogsBtn.Visible = false;
             // 
             // softwareCBMulti
             // 
@@ -522,7 +542,7 @@
             this.listBox1.Location = new System.Drawing.Point(11, 120);
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBox1.Size = new System.Drawing.Size(211, 499);
+            this.listBox1.Size = new System.Drawing.Size(211, 514);
             this.listBox1.TabIndex = 48;
             // 
             // selectAllBtn
@@ -588,35 +608,15 @@
             this.aboutLbl.Text = "v.2.2";
             this.aboutLbl.Click += new System.EventHandler(this.aboutLbl_Click);
             // 
-            // esetCB
+            // exportBtn
             // 
-            this.esetCB.AutoSize = true;
-            this.esetCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.esetCB.Location = new System.Drawing.Point(91, 293);
-            this.esetCB.Name = "esetCB";
-            this.esetCB.Size = new System.Drawing.Size(66, 22);
-            this.esetCB.TabIndex = 58;
-            this.esetCB.Text = "ESET";
-            this.esetCB.UseVisualStyleBackColor = true;
-            // 
-            // officeCB
-            // 
-            this.officeCB.AutoSize = true;
-            this.officeCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.officeCB.Location = new System.Drawing.Point(167, 293);
-            this.officeCB.Name = "officeCB";
-            this.officeCB.Size = new System.Drawing.Size(66, 22);
-            this.officeCB.TabIndex = 59;
-            this.officeCB.Text = "Office";
-            this.officeCB.UseVisualStyleBackColor = true;
-            // 
-            // errorLbl
-            // 
-            this.errorLbl.AutoSize = true;
-            this.errorLbl.Location = new System.Drawing.Point(118, 60);
-            this.errorLbl.Name = "errorLbl";
-            this.errorLbl.Size = new System.Drawing.Size(0, 15);
-            this.errorLbl.TabIndex = 60;
+            this.exportBtn.Location = new System.Drawing.Point(228, 562);
+            this.exportBtn.Name = "exportBtn";
+            this.exportBtn.Size = new System.Drawing.Size(100, 33);
+            this.exportBtn.TabIndex = 57;
+            this.exportBtn.Text = "Export CSV";
+            this.exportBtn.UseVisualStyleBackColor = true;
+            this.exportBtn.Click += new System.EventHandler(this.exportBtn_Click);
             // 
             // Form1
             // 
@@ -680,7 +680,6 @@
         private System.Windows.Forms.CheckBox adobeCB;
         private System.Windows.Forms.Label aboutLbl;
         private System.Windows.Forms.TabPage multiPCTab;
-        private System.Windows.Forms.Button checkForLogsBtn;
         private System.Windows.Forms.CheckBox softwareCBMulti;
         private System.Windows.Forms.CheckBox hddCBMulti;
         private System.Windows.Forms.CheckBox currUserCBMulti;
@@ -698,6 +697,7 @@
         private System.Windows.Forms.CheckBox officeCB;
         private System.Windows.Forms.CheckBox esetCB;
         private System.Windows.Forms.Label errorLbl;
+        private System.Windows.Forms.Button exportBtn;
     }
 }
 

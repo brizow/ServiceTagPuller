@@ -245,7 +245,22 @@ namespace ServiceTagPuller
         {
             //remove all the items from the list then readd
             listBox1.Items.Clear();
-            getMachinesFromAD();
+
+            try
+            {
+                var computers = GetComputerList.GetComputers();
+
+                //put it in the list
+                foreach (var computer in computers)
+                {
+                    listBox1.Items.Add(computer);
+                }
+            }
+            catch
+            {
+
+            }
+
         }
 
         private void selectAllBtn_Click(object sender, EventArgs e)
@@ -257,112 +272,49 @@ namespace ServiceTagPuller
             }
         }
 
-        private void checkForLogsBtn_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void getDetailsBtn_Click(object sender, EventArgs e)
         {
+            if (listBox1.SelectedItems.Count > 5)
+            {
+                var dialog = Prompt.ShowDialog("Warning!", "This will take a long time to process are you sure you want to continue?");
+            }
             getInfoMulti(Settings.Default.UserName, Settings.Default.Password);
         }
 
-        
-
-
-        #region MyMethods
-
-        private void checkLogs()
+        private void exportBtn_Click(object sender, EventArgs e)
         {
-            IList<string> returnedResults = new List<string>();
-
             if (listBox1.SelectedItems.Count > 0)
             {
+                //string a list of computers from the list box
+                List<string> computersToExport = new List<string>();
+
                 foreach (var item in listBox1.SelectedItems)
                 {
-                    //hit a remote machine, check paths
-                    //pushd \\oak - dc - asstmgr\c$\Windows\Temp
-                    //del cab_ * / f / a / q
-                    //cd..
-                    //cd Logs\CBS
-                    //del CbsPersist *.* / f / a / q
+                    //for each computer selected add it to the list
+                    computersToExport.Add(item.ToString());
                 }
-            }
-        }
+                
+                //string out the results
+                string saveResults = FileExporter.CSVExport(Settings.Default.UserName, Settings.Default.Password, computersToExport).ToString();
 
-        private void returnMachineDetails()
-        {
-            //IList<string> returnedResults = new List<string>();
-
-            //foreach (var item in listBox1.SelectedItems)
-            //{
-            //    comp = item.ToString();   /*.TrimEnd('r', 'n', '/');*/
-            //    try
-            //    {
-            //        OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
-
-            //        //see if the machine is up
-            //        command = "ping " + comp;
-            //        var isItUp = openCommandPrompt.SendCommand(command);
-
-            //        if (isItUp.Contains("Request timed out."))
-            //        {
-            //            returnedResults.Add(comp + ": This machine appears to be off.");
-            //        }
-            //        else if (isItUp.Contains("Ping request could not find host"))
-            //        {
-            //            returnedResults.Add(comp + ": This computer does not exist.");
-            //        }
-            //        else
-            //        {
-            //            returnedResults.Add(comp + ": This computer is up.");
-            //        }
-            //    }
-            //    catch
-            //    {
-
-            //    }
-            //}
-            //add items to the grid view
-            //dataGridView1.DataSource = returnedResults.Select(x => new { Value = x }).ToList();
-
-
-            #endregion
-        }
-
-        private void getMachinesFromAD()
-        {
-            //open a new search for PCs from AD
-            DirectoryEntry root = new DirectoryEntry("WinNT:");
-            try
-            {
-                foreach (DirectoryEntry computers in root.Children)
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.FileName = "ExportResults.txt";
+                //open the save file prompt
+                if (saveFile.ShowDialog() == DialogResult.OK)
                 {
-                    foreach (DirectoryEntry computer in computers.Children)
+                    if (saveFile.FileName != "")
                     {
-                        //if the returned item has schema name of Computer
-                        if (computer.SchemaClassName == "Computer")
-                        {
-                            //put it in the list
-                            listBox1.Items.Add(computer.Name);
-                        }
+                        //SAVE IT!
+                        File.WriteAllText(saveFile.FileName, saveResults);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                errorLbl.Text = ex.Message;
-            }
-            
+            }  
         }
 
+
+        //TODO - break this out in to a proper class file by itself
         private void getInfoMulti(string username, string password)
         {
-            //if(listBox1.SelectedItems.Count > 5)
-            //{
-            //    MessageBox.Show("This will take a very long time to get results, are you sure you want to scan " + listBox1.SelectedItems.Count.ToString());
-            //}
-
             string command;
             IList<string> returnedResults = new List<string>();
 
@@ -370,7 +322,7 @@ namespace ServiceTagPuller
             {
                 int i = 0;
                 //for each computer in the list
-                foreach  (var pc in listBox1.SelectedItems)
+                foreach (var pc in listBox1.SelectedItems)
                     try
                     {
                         if (i > 0)
@@ -471,43 +423,10 @@ namespace ServiceTagPuller
             }
         }
 
-        private void CSVExport(string username, string password)
-        {
-            //List<string> returnedResults = new List<string>();
+        #endregion
 
-            //List<string> commands = new List<string>();
-            //commands.Add("wmic /user:" + username + " /password:" + password + " /node:" + computer + " csproduct get vendor, name, identifyingnumber /format:table");
-            //commands.Add("wmic /user:" + username + " /password:" + password + " /node:" + computer + " cpu get Name /format:table");
-            //command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " memorychip get capacity /format:table";
-            //command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " diskdrive get caption /format:table";
-            //command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " os get SerialNumber, OSArchitecture, Caption /format:table";
-            //command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " computersystem get UserName, Name /format:table";
 
-            //command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter + " get Name, Version /format:table";
-            //command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter2 + " get Name, Version /format:table";
-            //command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter3 + " get Name, Version /format:table";)
-
-            //if (listBox1.SelectedItems.Count > 0)
-            //{
-            //    for (int i = 0; i < listBox1.SelectedItems.Count; i++)
-            //        try
-            //        {
-            //            string computer = @"""" + listBox1.SelectedItems[i].ToString() + @"""";
-
-            //            OpenCommandPrompt openCommandPrompt = new OpenCommandPrompt();
-
-            //            string filter = "\"Name like '%ESET%'\"";
-            //            string filter2 = "\"Name like '%Adobe%'\"";
-            //            string filter3 = "\"Name like '%Office%'\"";
-
-                        
-            //        }
-            //        catch
-            //        {
-
-            //        }
-            //}
-        }
+        #region MyMethods
 
         private void ClearResults()
         {
@@ -524,8 +443,46 @@ namespace ServiceTagPuller
             webBrowser1.Document.GetElementById("divOffice").InnerHtml = "";
         }
 
-        #endregion
+        public void ShowMyDialogBox()
+        {
+            //Form2 testDialog = new Form2();
 
+            //// Show testDialog as a modal dialog and determine if DialogResult = OK.
+            //if (testDialog.ShowDialog(this) == DialogResult.OK)
+            //{
+            //    // Read the contents of testDialog's TextBox.
+            //    this.txtResult.Text = testDialog.TextBox1.Text;
+            //}
+            //else
+            //{
+            //    this.txtResult.Text = "Cancelled";
+            //}
+            //testDialog.Dispose();
+        }
+
+        //work in progress.....
+        private void checkLogs()
+        {
+            IList<string> returnedResults = new List<string>();
+
+            if (listBox1.SelectedItems.Count > 0)
+            {
+                foreach (var item in listBox1.SelectedItems)
+                {
+                    //hit a remote machine, check paths
+                    //pushd \\oak - dc - asstmgr\c$\Windows\Temp
+                    //del cab_ * / f / a / q
+                    //cd..
+                    //cd Logs\CBS
+                    //del CbsPersist *.* / f / a / q
+                }
+            }
+        }
+        //work in progress....
         
+        #endregion
     }
 }
+
+
+
