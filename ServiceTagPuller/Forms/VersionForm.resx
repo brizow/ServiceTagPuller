@@ -118,7 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Rev 2 - 5/26/17
+    <value>Rev 2.2 - 6/6/2017
+-Revised multi PC.
+-Fixed multiple PC list updating from AD.
+-Broke out software options individually. 
+
+Rev 2 - 5/26/17
 -Added more details to the returned information.
 -Added the ability to find computer in AD. Although selecting multiple machines is slow.
 -Refactored methods.

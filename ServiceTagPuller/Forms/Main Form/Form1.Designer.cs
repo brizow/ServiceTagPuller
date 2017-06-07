@@ -37,7 +37,7 @@
             this.returnResultsLbl = new System.Windows.Forms.Label();
             this.mainTabsControl = new System.Windows.Forms.TabControl();
             this.onePCTab = new System.Windows.Forms.TabPage();
-            this.softwareCB = new System.Windows.Forms.CheckBox();
+            this.adobeCB = new System.Windows.Forms.CheckBox();
             this.hddCB = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.currUserCB = new System.Windows.Forms.CheckBox();
@@ -72,6 +72,9 @@
             this.findMachineBtn = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.aboutLbl = new System.Windows.Forms.Label();
+            this.esetCB = new System.Windows.Forms.CheckBox();
+            this.officeCB = new System.Windows.Forms.CheckBox();
+            this.errorLbl = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.mainTabsControl.SuspendLayout();
             this.onePCTab.SuspendLayout();
@@ -151,7 +154,9 @@
             // 
             // onePCTab
             // 
-            this.onePCTab.Controls.Add(this.softwareCB);
+            this.onePCTab.Controls.Add(this.officeCB);
+            this.onePCTab.Controls.Add(this.esetCB);
+            this.onePCTab.Controls.Add(this.adobeCB);
             this.onePCTab.Controls.Add(this.hddCB);
             this.onePCTab.Controls.Add(this.label7);
             this.onePCTab.Controls.Add(this.currUserCB);
@@ -177,16 +182,16 @@
             this.onePCTab.Text = "Single PC";
             this.onePCTab.UseVisualStyleBackColor = true;
             // 
-            // softwareCB
+            // adobeCB
             // 
-            this.softwareCB.AutoSize = true;
-            this.softwareCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.softwareCB.Location = new System.Drawing.Point(324, 260);
-            this.softwareCB.Name = "softwareCB";
-            this.softwareCB.Size = new System.Drawing.Size(86, 22);
-            this.softwareCB.TabIndex = 57;
-            this.softwareCB.Text = "Software";
-            this.softwareCB.UseVisualStyleBackColor = true;
+            this.adobeCB.AutoSize = true;
+            this.adobeCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.adobeCB.Location = new System.Drawing.Point(14, 293);
+            this.adobeCB.Name = "adobeCB";
+            this.adobeCB.Size = new System.Drawing.Size(69, 22);
+            this.adobeCB.TabIndex = 57;
+            this.adobeCB.Text = "Adobe";
+            this.adobeCB.UseVisualStyleBackColor = true;
             // 
             // hddCB
             // 
@@ -228,7 +233,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(7, 357);
+            this.label5.Location = new System.Drawing.Point(7, 385);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(393, 18);
             this.label5.TabIndex = 38;
@@ -290,7 +295,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(7, 302);
+            this.label4.Location = new System.Drawing.Point(7, 330);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(448, 18);
             this.label4.TabIndex = 33;
@@ -337,7 +342,7 @@
             // compNameSearchTB
             // 
             this.compNameSearchTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.compNameSearchTB.Location = new System.Drawing.Point(10, 326);
+            this.compNameSearchTB.Location = new System.Drawing.Point(10, 354);
             this.compNameSearchTB.MaxLength = 30;
             this.compNameSearchTB.Name = "compNameSearchTB";
             this.compNameSearchTB.Size = new System.Drawing.Size(200, 24);
@@ -357,7 +362,7 @@
             // FindItbtn
             // 
             this.FindItbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindItbtn.Location = new System.Drawing.Point(218, 326);
+            this.FindItbtn.Location = new System.Drawing.Point(218, 354);
             this.FindItbtn.Name = "FindItbtn";
             this.FindItbtn.Size = new System.Drawing.Size(87, 28);
             this.FindItbtn.TabIndex = 26;
@@ -377,6 +382,7 @@
             // 
             // multiPCTab
             // 
+            this.multiPCTab.Controls.Add(this.errorLbl);
             this.multiPCTab.Controls.Add(this.label10);
             this.multiPCTab.Controls.Add(this.checkForLogsBtn);
             this.multiPCTab.Controls.Add(this.softwareCBMulti);
@@ -579,8 +585,38 @@
             this.aboutLbl.Name = "aboutLbl";
             this.aboutLbl.Size = new System.Drawing.Size(32, 15);
             this.aboutLbl.TabIndex = 27;
-            this.aboutLbl.Text = "v.2.1";
+            this.aboutLbl.Text = "v.2.2";
             this.aboutLbl.Click += new System.EventHandler(this.aboutLbl_Click);
+            // 
+            // esetCB
+            // 
+            this.esetCB.AutoSize = true;
+            this.esetCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.esetCB.Location = new System.Drawing.Point(91, 293);
+            this.esetCB.Name = "esetCB";
+            this.esetCB.Size = new System.Drawing.Size(66, 22);
+            this.esetCB.TabIndex = 58;
+            this.esetCB.Text = "ESET";
+            this.esetCB.UseVisualStyleBackColor = true;
+            // 
+            // officeCB
+            // 
+            this.officeCB.AutoSize = true;
+            this.officeCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.officeCB.Location = new System.Drawing.Point(167, 293);
+            this.officeCB.Name = "officeCB";
+            this.officeCB.Size = new System.Drawing.Size(66, 22);
+            this.officeCB.TabIndex = 59;
+            this.officeCB.Text = "Office";
+            this.officeCB.UseVisualStyleBackColor = true;
+            // 
+            // errorLbl
+            // 
+            this.errorLbl.AutoSize = true;
+            this.errorLbl.Location = new System.Drawing.Point(118, 60);
+            this.errorLbl.Name = "errorLbl";
+            this.errorLbl.Size = new System.Drawing.Size(0, 15);
+            this.errorLbl.TabIndex = 60;
             // 
             // Form1
             // 
@@ -641,7 +677,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button FindItbtn;
         private System.Windows.Forms.WebBrowser webBrowser1;
-        private System.Windows.Forms.CheckBox softwareCB;
+        private System.Windows.Forms.CheckBox adobeCB;
         private System.Windows.Forms.Label aboutLbl;
         private System.Windows.Forms.TabPage multiPCTab;
         private System.Windows.Forms.Button checkForLogsBtn;
@@ -659,6 +695,9 @@
         private System.Windows.Forms.Button findMachineBtn;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox officeCB;
+        private System.Windows.Forms.CheckBox esetCB;
+        private System.Windows.Forms.Label errorLbl;
     }
 }
 

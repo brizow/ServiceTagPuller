@@ -151,25 +151,37 @@ namespace ServiceTagPuller
                                 webBrowser1.Document.GetElementById("divOS").InnerHtml = "";
                             }
 
-                            if (softwareCB.Checked)
+                            if (adobeCB.Checked)
                             {
                                 string filter = "\"Name like '%Adobe%'\"";
-                                string filter2 = "\"Name like '%ESET%'\"";
-                                string filter3 = "\"Name like '%Office%'\"";
+                                command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter + " get Name, Version /format:htable";
+                                webBrowser1.Document.GetElementById("divAdobe").InnerHtml = openCommandPrompt.SendCommand(command);
+                            }
+                            else
+                            {
+                                webBrowser1.Document.GetElementById("divAdobe").InnerHtml = "";
+                            }
 
+                            if (esetCB.Checked)
+                            {
+                                string filter = "\"Name like '%ESET%'\"";
                                 command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter + " get Name, Version /format:htable";
                                 webBrowser1.Document.GetElementById("divAntiVirus").InnerHtml = openCommandPrompt.SendCommand(command);
 
-                                command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter2 + " get Name, Version /format:htable";
-                                webBrowser1.Document.GetElementById("divAdobe").InnerHtml = openCommandPrompt.SendCommand(command);
-
-                                command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter3 + " get Name, Version /format:htable";
-                                webBrowser1.Document.GetElementById("divOffice").InnerHtml = openCommandPrompt.SendCommand(command);
                             }
                             else
                             {
                                 webBrowser1.Document.GetElementById("divAntiVirus").InnerHtml = "";
-                                webBrowser1.Document.GetElementById("divAdobe").InnerHtml = "";
+                            }
+
+                            if (officeCB.Checked)
+                            {
+                                string filter = "\"Name like '%Office%'\"";
+                                command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter + " get Name, Version /format:htable";
+                                webBrowser1.Document.GetElementById("divOffice").InnerHtml = openCommandPrompt.SendCommand(command);
+                            }
+                            else
+                            {
                                 webBrowser1.Document.GetElementById("divOffice").InnerHtml = "";
                             }
                         }
@@ -322,22 +334,35 @@ namespace ServiceTagPuller
         {
             //open a new search for PCs from AD
             DirectoryEntry root = new DirectoryEntry("WinNT:");
-            foreach (DirectoryEntry computers in root.Children)
+            try
             {
-                foreach (DirectoryEntry computer in computers.Children)
+                foreach (DirectoryEntry computers in root.Children)
                 {
-                    //if the returned item has schema name of Computer
-                    if (computer.SchemaClassName == "Computer")
+                    foreach (DirectoryEntry computer in computers.Children)
                     {
-                        //put it in the list
-                        listBox1.Items.Add(computer.Name);
+                        //if the returned item has schema name of Computer
+                        if (computer.SchemaClassName == "Computer")
+                        {
+                            //put it in the list
+                            listBox1.Items.Add(computer.Name);
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                errorLbl.Text = ex.Message;
+            }
+            
         }
 
         private void getInfoMulti(string username, string password)
         {
+            //if(listBox1.SelectedItems.Count > 5)
+            //{
+            //    MessageBox.Show("This will take a very long time to get results, are you sure you want to scan " + listBox1.SelectedItems.Count.ToString());
+            //}
+
             string command;
             IList<string> returnedResults = new List<string>();
 
