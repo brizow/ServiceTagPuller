@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             this.settingsLbl = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.userNameTB = new System.Windows.Forms.TextBox();
             this.passwordTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.showPasswordBtn = new System.Windows.Forms.Button();
             this.saveChangesBtn = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.userNameTB = new System.Windows.Forms.TextBox();
+            this.domainTB = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // settingsLbl
@@ -46,24 +48,6 @@
             this.settingsLbl.Size = new System.Drawing.Size(108, 29);
             this.settingsLbl.TabIndex = 41;
             this.settingsLbl.Text = "Settings";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(14, 62);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(125, 18);
-            this.label2.TabIndex = 43;
-            this.label2.Text = "Stored Username";
-            // 
-            // userNameTB
-            // 
-            this.userNameTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userNameTB.Location = new System.Drawing.Point(17, 83);
-            this.userNameTB.Name = "userNameTB";
-            this.userNameTB.Size = new System.Drawing.Size(200, 24);
-            this.userNameTB.TabIndex = 44;
             // 
             // passwordTB
             // 
@@ -104,11 +88,49 @@
             this.saveChangesBtn.UseVisualStyleBackColor = true;
             this.saveChangesBtn.Click += new System.EventHandler(this.saveChangesBtn_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(14, 62);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(125, 18);
+            this.label2.TabIndex = 43;
+            this.label2.Text = "Stored Username";
+            // 
+            // userNameTB
+            // 
+            this.userNameTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userNameTB.Location = new System.Drawing.Point(17, 83);
+            this.userNameTB.Name = "userNameTB";
+            this.userNameTB.Size = new System.Drawing.Size(200, 24);
+            this.userNameTB.TabIndex = 44;
+            // 
+            // domainTB
+            // 
+            this.domainTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.domainTB.Location = new System.Drawing.Point(329, 83);
+            this.domainTB.Name = "domainTB";
+            this.domainTB.Size = new System.Drawing.Size(200, 24);
+            this.domainTB.TabIndex = 50;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(326, 62);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(60, 18);
+            this.label3.TabIndex = 49;
+            this.label3.Text = "Domain";
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(805, 524);
+            this.Controls.Add(this.domainTB);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.saveChangesBtn);
             this.Controls.Add(this.showPasswordBtn);
             this.Controls.Add(this.passwordTB);
@@ -126,11 +148,13 @@
         #endregion
 
         private System.Windows.Forms.Label settingsLbl;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox userNameTB;
         private System.Windows.Forms.TextBox passwordTB;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button showPasswordBtn;
         private System.Windows.Forms.Button saveChangesBtn;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox userNameTB;
+        private System.Windows.Forms.TextBox domainTB;
+        private System.Windows.Forms.Label label3;
     }
 }

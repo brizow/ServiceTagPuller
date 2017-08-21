@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.DirectoryServices;
 using System.Linq;
 using ServiceTagPuller.Properties;
+using System.Text;
 
 namespace ServiceTagPuller
 {
@@ -25,31 +26,25 @@ namespace ServiceTagPuller
             //intialize default browser control
             webBrowser1.Navigate("about:blank");
             webBrowser1.Document.Write(browsercontent);
+
+            //TODO3 add getConfName to init. This will grab your local 
+            //computer's name so you can get specs of it as well.
         }
 
         #region SinglePCTab
 
         private void FindItbtn_Click(object sender, EventArgs e)
         {
-            //this is not the way to utilize this.
-            //I think I need to put this in a background worker, call completion, update time. 
-            //However, the browser object on the form does not like being put in a bg worker.
-            //I need to spend more time on this later.
-            //countTimer.Start();
-
-            //my cheap method to show something is happening beyond Not Responding. 
-            //Trying to use background workers with browsers elements requires a bit
-            //more programming. Let it go non responding, we are the only folks using it.
-            //FindItbtn.Enabled = false;
-
-            //fill variables them
+            //fill variables
             string user = adminUserNameTB.Text;
             string pass = adminPassTB.Text;
             string comp = @"""" + compNameSearchTB.Text + @"""";
             getInfoSingle(user, pass, comp);
         }
+
         private void compNameSearchTB_KeyPress(object sender, KeyPressEventArgs e)
         {
+            //allow enter to function for searching as well
             if (e.KeyChar == (char)Keys.Enter)
             {
                 string user = adminUserNameTB.Text;
@@ -153,7 +148,7 @@ namespace ServiceTagPuller
 
                             if (adobeCB.Checked)
                             {
-                                string filter = "\"Name like '%Adobe%'\"";
+                                string filter = "\"Name like 'Adobe%'\"";
                                 command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter + " get Name, Version /format:htable";
                                 webBrowser1.Document.GetElementById("divAdobe").InnerHtml = openCommandPrompt.SendCommand(command);
                             }
@@ -162,9 +157,9 @@ namespace ServiceTagPuller
                                 webBrowser1.Document.GetElementById("divAdobe").InnerHtml = "";
                             }
 
-                            if (esetCB.Checked)
+                            if (antivirusCB.Checked)
                             {
-                                string filter = "\"Name like '%ESET%'\"";
+                                string filter = "\"Name like 'Symantec%'\"";
                                 command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter + " get Name, Version /format:htable";
                                 webBrowser1.Document.GetElementById("divAntiVirus").InnerHtml = openCommandPrompt.SendCommand(command);
 
@@ -176,7 +171,7 @@ namespace ServiceTagPuller
 
                             if (officeCB.Checked)
                             {
-                                string filter = "\"Name like '%Office%'\"";
+                                string filter = "\"Name like 'Office%'\"";
                                 command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter + " get Name, Version /format:htable";
                                 webBrowser1.Document.GetElementById("divOffice").InnerHtml = openCommandPrompt.SendCommand(command);
                             }
@@ -243,12 +238,16 @@ namespace ServiceTagPuller
 
         private void findMachineBtn_Click(object sender, EventArgs e)
         {
+            if (Settings.Default.Domain == "")
+            {
+                errorLbl.Text = "*Please supply a Domain name in Settings.";
+            }
             //remove all the items from the list then readd
             listBox1.Items.Clear();
 
             try
             {
-                var computers = GetComputerList.GetComputers();
+                var computers = GetADItems.GetComputers(Settings.Default.Domain);
 
                 //put it in the list
                 foreach (var computer in computers)
@@ -285,34 +284,50 @@ namespace ServiceTagPuller
         {
             if (listBox1.SelectedItems.Count > 0)
             {
+                //TODO1 - take the returned results and export out only the rows that are not blank or off
+                //CSV export
+                var csv = new StringBuilder();
+
                 //string a list of computers from the list box
-                List<string> computersToExport = new List<string>();
+                //List<string> computersToExport = new List<string>();
 
-                foreach (var item in listBox1.SelectedItems)
+                //go through each of the returned results
+                foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    //for each computer selected add it to the list
-                    computersToExport.Add(item.ToString());
-                }
-                
-                //string out the results
-                string saveResults = FileExporter.CSVExport(Settings.Default.UserName, Settings.Default.Password, computersToExport).ToString();
-
-                SaveFileDialog saveFile = new SaveFileDialog();
-                saveFile.FileName = "ExportResults.txt";
-                //open the save file prompt
-                if (saveFile.ShowDialog() == DialogResult.OK)
-                {
-                    if (saveFile.FileName != "")
+                    ////check the result for blanks - don't add them
+                    if(row.Cells[0].Value != "")
                     {
-                        //SAVE IT!
-                        File.WriteAllText(saveFile.FileName, saveResults);
+                        //computersToExport.Add(row.ToString());
+                        csv.AppendLine(row.Cells[0].Value.ToString());
+                    }  
+                }
+
+                try
+                {
+                    //string out the results
+                    string saveResults = csv.ToString();
+
+                    SaveFileDialog saveFile = new SaveFileDialog();
+                    saveFile.FileName = "ExportResults.csv";
+                    //open the save file prompt
+                    if (saveFile.ShowDialog() == DialogResult.OK)
+                    {
+                        if (saveFile.FileName != "")
+                        {
+                            //SAVE IT!
+                            File.WriteAllText(saveFile.FileName, saveResults);
+                        }
                     }
                 }
-            }  
+                catch (Exception ex)
+                {
+                    errorLbl.Text = ex.Message;
+                }
+            }
         }
 
 
-        //TODO - break this out in to a proper class file by itself
+        //TODO2 - break this out in to a proper class file by itself
         private void getInfoMulti(string username, string password)
         {
             string command;
@@ -353,13 +368,14 @@ namespace ServiceTagPuller
                             {
                                 if (currUserCBMulti.Checked)
                                 {
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " computersystem get UserName, Name /format:table";
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " computersystem get UserName, Name /format:csv";
                                     returnedResults.Add(openCommandPrompt.SendCommand(command));
+
                                 }
                                 if (serialNumberCBMulti.Checked)
                                 {
                                     //find serial number command
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " csproduct get vendor, name, identifyingnumber /format:table";
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " csproduct get vendor, name, identifyingnumber /format:csv";
                                     ///format:htable - Displays a pretty preformatted table for us.
                                     //put it in the browser1 control in the divSerial section
                                     returnedResults.Add(openCommandPrompt.SendCommand(command));
@@ -367,40 +383,40 @@ namespace ServiceTagPuller
 
                                 if (procCBMulti.Checked)
                                 {
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " cpu get Name /format:table";
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " cpu get Name /format:csv";
                                     returnedResults.Add(openCommandPrompt.SendCommand(command));
                                 }
 
                                 if (ramCBMulti.Checked)
                                 {
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " memorychip get capacity /format:table";
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " memorychip get capacity /format:csv";
                                     returnedResults.Add(openCommandPrompt.SendCommand(command));
                                 }
 
                                 if (hddCBMulti.Checked)
                                 {
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " diskdrive get caption /format:table";
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " diskdrive get caption /format:csv";
                                     returnedResults.Add(openCommandPrompt.SendCommand(command));
                                 }
 
                                 if (osCBMulti.Checked)
                                 {
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " os get SerialNumber, OSArchitecture, Caption /format:table";
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " os get SerialNumber, OSArchitecture, Caption /format:csv";
                                     returnedResults.Add(openCommandPrompt.SendCommand(command));
                                 }
                                 if (softwareCBMulti.Checked)
                                 {
-                                    string filter = "\"Name like '%ESET%'\"";
-                                    string filter2 = "\"Name like '%Adobe%'\"";
-                                    string filter3 = "\"Name like '%Office%'\"";
+                                    string filter = "\"Name like 'Symantec%'\"";
+                                    string filter2 = "\"Name like 'Adobe%'\"";
+                                    string filter3 = "\"Name like 'Office%'\"";
 
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter + " get Name, Version /format:table";
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter + " get Name, Version /format:csv";
                                     returnedResults.Add(openCommandPrompt.SendCommand(command));
 
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter2 + " get Name, Version /format:table";
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter2 + " get Name, Version /format:csv";
                                     returnedResults.Add(openCommandPrompt.SendCommand(command));
 
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter3 + " get Name, Version /format:table";
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " product where " + filter3 + " get Name, Version /format:csv";
                                     returnedResults.Add(openCommandPrompt.SendCommand(command));
                                 }
 
@@ -417,6 +433,11 @@ namespace ServiceTagPuller
                     {
 
                     }
+                //for each item in the list we want to find enviro.newline and take everything after
+                //for i - go through the returnresult i++
+                //what this does is take each item, split it in an array, take the seperated values
+                //return results[i] = returnresults[i].split(new string[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)[1]
+
 
                 //add items to the grid view
                 dataGridView1.DataSource = returnedResults.Select(x => new { Value = x }).ToList();
@@ -462,8 +483,28 @@ namespace ServiceTagPuller
             }
         }
         //work in progress....
-        
+
         #endregion
+
+        private void findBtn_Click(object sender, EventArgs e)
+        {
+            string userSearch = userSearchText.Text;
+            userListBox.Items.Clear();
+
+            try
+            {
+                var users = GetADItems.GetADGroups(Settings.Default.Domain, userSearch);
+                //put it in the list
+                foreach (var user in users)
+                {
+                    userListBox.Items.Add(user);
+                }
+            }
+            catch
+            {
+
+            }
+        }
     }
 }
 

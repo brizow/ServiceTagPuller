@@ -50,8 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>pcinfo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>ServiceTagPuller.Program</StartupObject>
@@ -101,7 +100,7 @@
     <Compile Include="Forms\Main Form\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GetComputerList.cs" />
+    <Compile Include="GetADItems.cs" />
     <Compile Include="OpenCommandPrompt.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Prompt.cs" />
@@ -159,6 +158,7 @@
     <Resource Include="bin\Debug\ResultsBody.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Content Include="pcinfo.ico" />
     <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>

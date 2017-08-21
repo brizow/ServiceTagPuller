@@ -37,6 +37,7 @@ namespace ServiceTagPuller
             //save changes
             Settings.Default.UserName = userNameTB.Text;
             Settings.Default.Password = passwordTB.Text;
+            Settings.Default.Domain = domainTB.Text;
             Settings.Default.Save();
             //close the settings form
             this.Close();

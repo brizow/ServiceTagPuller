@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveCredentialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -35,10 +36,10 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userPassStoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnResultsLbl = new System.Windows.Forms.Label();
-            this.mainTabsControl = new System.Windows.Forms.TabControl();
+            this.MainTabPage = new System.Windows.Forms.TabControl();
             this.onePCTab = new System.Windows.Forms.TabPage();
             this.officeCB = new System.Windows.Forms.CheckBox();
-            this.esetCB = new System.Windows.Forms.CheckBox();
+            this.antivirusCB = new System.Windows.Forms.CheckBox();
             this.adobeCB = new System.Windows.Forms.CheckBox();
             this.hddCB = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -60,6 +61,7 @@
             this.multiPCTab = new System.Windows.Forms.TabPage();
             this.errorLbl = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.exportBtn = new System.Windows.Forms.Button();
             this.softwareCBMulti = new System.Windows.Forms.CheckBox();
             this.hddCBMulti = new System.Windows.Forms.CheckBox();
             this.currUserCBMulti = new System.Windows.Forms.CheckBox();
@@ -73,23 +75,28 @@
             this.getDetailsBtn = new System.Windows.Forms.Button();
             this.findMachineBtn = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
+            this.userTab = new System.Windows.Forms.TabPage();
+            this.findBtn = new System.Windows.Forms.Button();
             this.aboutLbl = new System.Windows.Forms.Label();
-            this.exportBtn = new System.Windows.Forms.Button();
+            this.userSearchText = new System.Windows.Forms.TextBox();
+            this.userListBox = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
-            this.mainTabsControl.SuspendLayout();
+            this.MainTabPage.SuspendLayout();
             this.onePCTab.SuspendLayout();
             this.multiPCTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.userTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1158, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1158, 28);
             this.menuStrip1.TabIndex = 22;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -99,20 +106,20 @@
             this.saveCredentialsToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // saveCredentialsToolStripMenuItem
             // 
             this.saveCredentialsToolStripMenuItem.Name = "saveCredentialsToolStripMenuItem";
-            this.saveCredentialsToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.saveCredentialsToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
             this.saveCredentialsToolStripMenuItem.Text = "Save Credentials";
             this.saveCredentialsToolStripMenuItem.Click += new System.EventHandler(this.saveCredentialsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -121,13 +128,13 @@
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.userPassStoreToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // userPassStoreToolStripMenuItem
             // 
             this.userPassStoreToolStripMenuItem.Name = "userPassStoreToolStripMenuItem";
-            this.userPassStoreToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.userPassStoreToolStripMenuItem.Size = new System.Drawing.Size(185, 26);
             this.userPassStoreToolStripMenuItem.Text = "User/Pass Store";
             this.userPassStoreToolStripMenuItem.Click += new System.EventHandler(this.userPassStoreToolStripMenuItem_Click);
             // 
@@ -138,24 +145,25 @@
             this.returnResultsLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.returnResultsLbl.Location = new System.Drawing.Point(484, 733);
             this.returnResultsLbl.Name = "returnResultsLbl";
-            this.returnResultsLbl.Size = new System.Drawing.Size(0, 18);
+            this.returnResultsLbl.Size = new System.Drawing.Size(0, 24);
             this.returnResultsLbl.TabIndex = 23;
             // 
-            // mainTabsControl
+            // MainTabPage
             // 
-            this.mainTabsControl.Controls.Add(this.onePCTab);
-            this.mainTabsControl.Controls.Add(this.multiPCTab);
-            this.mainTabsControl.Location = new System.Drawing.Point(12, 38);
-            this.mainTabsControl.Name = "mainTabsControl";
-            this.mainTabsControl.SelectedIndex = 0;
-            this.mainTabsControl.Size = new System.Drawing.Size(1134, 691);
-            this.mainTabsControl.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
-            this.mainTabsControl.TabIndex = 26;
+            this.MainTabPage.Controls.Add(this.onePCTab);
+            this.MainTabPage.Controls.Add(this.multiPCTab);
+            this.MainTabPage.Controls.Add(this.userTab);
+            this.MainTabPage.Location = new System.Drawing.Point(12, 38);
+            this.MainTabPage.Name = "MainTabPage";
+            this.MainTabPage.SelectedIndex = 0;
+            this.MainTabPage.Size = new System.Drawing.Size(1134, 691);
+            this.MainTabPage.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
+            this.MainTabPage.TabIndex = 26;
             // 
             // onePCTab
             // 
             this.onePCTab.Controls.Add(this.officeCB);
-            this.onePCTab.Controls.Add(this.esetCB);
+            this.onePCTab.Controls.Add(this.antivirusCB);
             this.onePCTab.Controls.Add(this.adobeCB);
             this.onePCTab.Controls.Add(this.hddCB);
             this.onePCTab.Controls.Add(this.label7);
@@ -174,10 +182,10 @@
             this.onePCTab.Controls.Add(this.label1);
             this.onePCTab.Controls.Add(this.FindItbtn);
             this.onePCTab.Controls.Add(this.webBrowser1);
-            this.onePCTab.Location = new System.Drawing.Point(4, 24);
+            this.onePCTab.Location = new System.Drawing.Point(4, 27);
             this.onePCTab.Name = "onePCTab";
             this.onePCTab.Padding = new System.Windows.Forms.Padding(3);
-            this.onePCTab.Size = new System.Drawing.Size(1126, 663);
+            this.onePCTab.Size = new System.Drawing.Size(1126, 660);
             this.onePCTab.TabIndex = 0;
             this.onePCTab.Text = "Single PC";
             this.onePCTab.UseVisualStyleBackColor = true;
@@ -186,23 +194,23 @@
             // 
             this.officeCB.AutoSize = true;
             this.officeCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.officeCB.Location = new System.Drawing.Point(167, 293);
+            this.officeCB.Location = new System.Drawing.Point(184, 293);
             this.officeCB.Name = "officeCB";
-            this.officeCB.Size = new System.Drawing.Size(66, 22);
+            this.officeCB.Size = new System.Drawing.Size(80, 28);
             this.officeCB.TabIndex = 59;
             this.officeCB.Text = "Office";
             this.officeCB.UseVisualStyleBackColor = true;
             // 
-            // esetCB
+            // antivirusCB
             // 
-            this.esetCB.AutoSize = true;
-            this.esetCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.esetCB.Location = new System.Drawing.Point(91, 293);
-            this.esetCB.Name = "esetCB";
-            this.esetCB.Size = new System.Drawing.Size(66, 22);
-            this.esetCB.TabIndex = 58;
-            this.esetCB.Text = "ESET";
-            this.esetCB.UseVisualStyleBackColor = true;
+            this.antivirusCB.AutoSize = true;
+            this.antivirusCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.antivirusCB.Location = new System.Drawing.Point(91, 293);
+            this.antivirusCB.Name = "antivirusCB";
+            this.antivirusCB.Size = new System.Drawing.Size(103, 28);
+            this.antivirusCB.TabIndex = 58;
+            this.antivirusCB.Text = "Antivirus";
+            this.antivirusCB.UseVisualStyleBackColor = true;
             // 
             // adobeCB
             // 
@@ -210,7 +218,7 @@
             this.adobeCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.adobeCB.Location = new System.Drawing.Point(14, 293);
             this.adobeCB.Name = "adobeCB";
-            this.adobeCB.Size = new System.Drawing.Size(69, 22);
+            this.adobeCB.Size = new System.Drawing.Size(89, 28);
             this.adobeCB.TabIndex = 57;
             this.adobeCB.Text = "Adobe";
             this.adobeCB.UseVisualStyleBackColor = true;
@@ -223,7 +231,7 @@
             this.hddCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hddCB.Location = new System.Drawing.Point(167, 260);
             this.hddCB.Name = "hddCB";
-            this.hddCB.Size = new System.Drawing.Size(60, 22);
+            this.hddCB.Size = new System.Drawing.Size(72, 28);
             this.hddCB.TabIndex = 41;
             this.hddCB.Text = "HDD";
             this.hddCB.UseVisualStyleBackColor = true;
@@ -234,7 +242,7 @@
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(6, 8);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(281, 29);
+            this.label7.Size = new System.Drawing.Size(340, 36);
             this.label7.TabIndex = 40;
             this.label7.Text = "Single Machine Details";
             // 
@@ -246,7 +254,7 @@
             this.currUserCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.currUserCB.Location = new System.Drawing.Point(167, 227);
             this.currUserCB.Name = "currUserCB";
-            this.currUserCB.Size = new System.Drawing.Size(112, 22);
+            this.currUserCB.Size = new System.Drawing.Size(138, 28);
             this.currUserCB.TabIndex = 39;
             this.currUserCB.Text = "Current User";
             this.currUserCB.UseVisualStyleBackColor = true;
@@ -257,7 +265,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(7, 385);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(393, 18);
+            this.label5.Size = new System.Drawing.Size(494, 24);
             this.label5.TabIndex = 38;
             this.label5.Text = "Returned results can take up to 30 seconds to come back.";
             // 
@@ -269,7 +277,7 @@
             this.osInfoCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.osInfoCB.Location = new System.Drawing.Point(241, 260);
             this.osInfoCB.Name = "osInfoCB";
-            this.osInfoCB.Size = new System.Drawing.Size(77, 22);
+            this.osInfoCB.Size = new System.Drawing.Size(94, 28);
             this.osInfoCB.TabIndex = 37;
             this.osInfoCB.Text = "OS Info";
             this.osInfoCB.UseVisualStyleBackColor = true;
@@ -282,7 +290,7 @@
             this.procCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.procCB.Location = new System.Drawing.Point(91, 260);
             this.procCB.Name = "procCB";
-            this.procCB.Size = new System.Drawing.Size(59, 22);
+            this.procCB.Size = new System.Drawing.Size(71, 28);
             this.procCB.TabIndex = 36;
             this.procCB.Text = "Proc";
             this.procCB.UseVisualStyleBackColor = true;
@@ -295,7 +303,7 @@
             this.ramCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ramCB.Location = new System.Drawing.Point(14, 260);
             this.ramCB.Name = "ramCB";
-            this.ramCB.Size = new System.Drawing.Size(60, 22);
+            this.ramCB.Size = new System.Drawing.Size(74, 28);
             this.ramCB.TabIndex = 35;
             this.ramCB.Text = "RAM";
             this.ramCB.UseVisualStyleBackColor = true;
@@ -308,7 +316,7 @@
             this.serialNumCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.serialNumCB.Location = new System.Drawing.Point(14, 227);
             this.serialNumCB.Name = "serialNumCB";
-            this.serialNumCB.Size = new System.Drawing.Size(121, 22);
+            this.serialNumCB.Size = new System.Drawing.Size(153, 28);
             this.serialNumCB.TabIndex = 34;
             this.serialNumCB.Text = "Serial Number";
             this.serialNumCB.UseVisualStyleBackColor = true;
@@ -319,7 +327,7 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(7, 330);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(448, 18);
+            this.label4.Size = new System.Drawing.Size(567, 24);
             this.label4.TabIndex = 33;
             this.label4.Text = "Enter the IP or Computer Name of the machine you are looking for.";
             // 
@@ -329,7 +337,7 @@
             this.adminPassTB.Location = new System.Drawing.Point(10, 166);
             this.adminPassTB.Name = "adminPassTB";
             this.adminPassTB.PasswordChar = '*';
-            this.adminPassTB.Size = new System.Drawing.Size(200, 24);
+            this.adminPassTB.Size = new System.Drawing.Size(200, 29);
             this.adminPassTB.TabIndex = 28;
             this.adminPassTB.UseSystemPasswordChar = true;
             // 
@@ -339,7 +347,7 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(7, 142);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(381, 18);
+            this.label3.Size = new System.Drawing.Size(484, 24);
             this.label3.TabIndex = 32;
             this.label3.Text = "Enter your admin password for the above account name.";
             // 
@@ -348,7 +356,7 @@
             this.adminUserNameTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.adminUserNameTB.Location = new System.Drawing.Point(10, 111);
             this.adminUserNameTB.Name = "adminUserNameTB";
-            this.adminUserNameTB.Size = new System.Drawing.Size(200, 24);
+            this.adminUserNameTB.Size = new System.Drawing.Size(200, 29);
             this.adminUserNameTB.TabIndex = 27;
             // 
             // label2
@@ -357,7 +365,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(7, 86);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(420, 18);
+            this.label2.Size = new System.Drawing.Size(532, 24);
             this.label2.TabIndex = 31;
             this.label2.Text = "Enter your admin username for access to the remote machine.";
             // 
@@ -367,7 +375,7 @@
             this.compNameSearchTB.Location = new System.Drawing.Point(10, 354);
             this.compNameSearchTB.MaxLength = 30;
             this.compNameSearchTB.Name = "compNameSearchTB";
-            this.compNameSearchTB.Size = new System.Drawing.Size(200, 24);
+            this.compNameSearchTB.Size = new System.Drawing.Size(200, 29);
             this.compNameSearchTB.TabIndex = 30;
             this.compNameSearchTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.compNameSearchTB_KeyPress);
             // 
@@ -377,7 +385,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(7, 203);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(207, 18);
+            this.label1.Size = new System.Drawing.Size(262, 24);
             this.label1.TabIndex = 29;
             this.label1.Text = "What would you like to return?";
             // 
@@ -420,10 +428,10 @@
             this.multiPCTab.Controls.Add(this.getDetailsBtn);
             this.multiPCTab.Controls.Add(this.findMachineBtn);
             this.multiPCTab.Controls.Add(this.label8);
-            this.multiPCTab.Location = new System.Drawing.Point(4, 24);
+            this.multiPCTab.Location = new System.Drawing.Point(4, 27);
             this.multiPCTab.Name = "multiPCTab";
             this.multiPCTab.Padding = new System.Windows.Forms.Padding(3);
-            this.multiPCTab.Size = new System.Drawing.Size(1126, 663);
+            this.multiPCTab.Size = new System.Drawing.Size(1126, 660);
             this.multiPCTab.TabIndex = 1;
             this.multiPCTab.Text = "Multiple PCs";
             this.multiPCTab.UseVisualStyleBackColor = true;
@@ -431,9 +439,10 @@
             // errorLbl
             // 
             this.errorLbl.AutoSize = true;
+            this.errorLbl.ForeColor = System.Drawing.Color.Red;
             this.errorLbl.Location = new System.Drawing.Point(118, 60);
             this.errorLbl.Name = "errorLbl";
-            this.errorLbl.Size = new System.Drawing.Size(0, 15);
+            this.errorLbl.Size = new System.Drawing.Size(0, 18);
             this.errorLbl.TabIndex = 60;
             // 
             // label10
@@ -442,9 +451,19 @@
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(12, 13);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(299, 29);
+            this.label10.Size = new System.Drawing.Size(362, 36);
             this.label10.TabIndex = 59;
             this.label10.Text = "Multiple Machine Details";
+            // 
+            // exportBtn
+            // 
+            this.exportBtn.Location = new System.Drawing.Point(228, 562);
+            this.exportBtn.Name = "exportBtn";
+            this.exportBtn.Size = new System.Drawing.Size(100, 33);
+            this.exportBtn.TabIndex = 57;
+            this.exportBtn.Text = "Export CSV";
+            this.exportBtn.UseVisualStyleBackColor = true;
+            this.exportBtn.Click += new System.EventHandler(this.exportBtn_Click);
             // 
             // softwareCBMulti
             // 
@@ -452,7 +471,7 @@
             this.softwareCBMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.softwareCBMulti.Location = new System.Drawing.Point(228, 288);
             this.softwareCBMulti.Name = "softwareCBMulti";
-            this.softwareCBMulti.Size = new System.Drawing.Size(86, 22);
+            this.softwareCBMulti.Size = new System.Drawing.Size(104, 28);
             this.softwareCBMulti.TabIndex = 56;
             this.softwareCBMulti.Text = "Software";
             this.softwareCBMulti.UseVisualStyleBackColor = true;
@@ -465,7 +484,7 @@
             this.hddCBMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hddCBMulti.Location = new System.Drawing.Point(228, 232);
             this.hddCBMulti.Name = "hddCBMulti";
-            this.hddCBMulti.Size = new System.Drawing.Size(60, 22);
+            this.hddCBMulti.Size = new System.Drawing.Size(72, 28);
             this.hddCBMulti.TabIndex = 54;
             this.hddCBMulti.Text = "HDD";
             this.hddCBMulti.UseVisualStyleBackColor = true;
@@ -478,7 +497,7 @@
             this.currUserCBMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.currUserCBMulti.Location = new System.Drawing.Point(228, 120);
             this.currUserCBMulti.Name = "currUserCBMulti";
-            this.currUserCBMulti.Size = new System.Drawing.Size(112, 22);
+            this.currUserCBMulti.Size = new System.Drawing.Size(138, 28);
             this.currUserCBMulti.TabIndex = 53;
             this.currUserCBMulti.Text = "Current User";
             this.currUserCBMulti.UseVisualStyleBackColor = true;
@@ -491,7 +510,7 @@
             this.osCBMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.osCBMulti.Location = new System.Drawing.Point(228, 260);
             this.osCBMulti.Name = "osCBMulti";
-            this.osCBMulti.Size = new System.Drawing.Size(77, 22);
+            this.osCBMulti.Size = new System.Drawing.Size(94, 28);
             this.osCBMulti.TabIndex = 52;
             this.osCBMulti.Text = "OS Info";
             this.osCBMulti.UseVisualStyleBackColor = true;
@@ -504,7 +523,7 @@
             this.procCBMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.procCBMulti.Location = new System.Drawing.Point(229, 204);
             this.procCBMulti.Name = "procCBMulti";
-            this.procCBMulti.Size = new System.Drawing.Size(59, 22);
+            this.procCBMulti.Size = new System.Drawing.Size(71, 28);
             this.procCBMulti.TabIndex = 51;
             this.procCBMulti.Text = "Proc";
             this.procCBMulti.UseVisualStyleBackColor = true;
@@ -517,7 +536,7 @@
             this.ramCBMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ramCBMulti.Location = new System.Drawing.Point(228, 176);
             this.ramCBMulti.Name = "ramCBMulti";
-            this.ramCBMulti.Size = new System.Drawing.Size(60, 22);
+            this.ramCBMulti.Size = new System.Drawing.Size(74, 28);
             this.ramCBMulti.TabIndex = 50;
             this.ramCBMulti.Text = "RAM";
             this.ramCBMulti.UseVisualStyleBackColor = true;
@@ -530,7 +549,7 @@
             this.serialNumberCBMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.serialNumberCBMulti.Location = new System.Drawing.Point(228, 148);
             this.serialNumberCBMulti.Name = "serialNumberCBMulti";
-            this.serialNumberCBMulti.Size = new System.Drawing.Size(121, 22);
+            this.serialNumberCBMulti.Size = new System.Drawing.Size(153, 28);
             this.serialNumberCBMulti.TabIndex = 49;
             this.serialNumberCBMulti.Text = "Serial Number";
             this.serialNumberCBMulti.UseVisualStyleBackColor = true;
@@ -538,11 +557,11 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
+            this.listBox1.ItemHeight = 18;
             this.listBox1.Location = new System.Drawing.Point(11, 120);
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBox1.Size = new System.Drawing.Size(211, 514);
+            this.listBox1.Size = new System.Drawing.Size(211, 508);
             this.listBox1.TabIndex = 48;
             // 
             // selectAllBtn
@@ -562,10 +581,10 @@
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(363, 4);
+            this.dataGridView1.Location = new System.Drawing.Point(387, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(757, 656);
+            this.dataGridView1.Size = new System.Drawing.Size(733, 656);
             this.dataGridView1.TabIndex = 46;
             // 
             // getDetailsBtn
@@ -594,8 +613,31 @@
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(6, 6);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(0, 29);
+            this.label8.Size = new System.Drawing.Size(0, 36);
             this.label8.TabIndex = 41;
+            // 
+            // userTab
+            // 
+            this.userTab.Controls.Add(this.userListBox);
+            this.userTab.Controls.Add(this.userSearchText);
+            this.userTab.Controls.Add(this.findBtn);
+            this.userTab.Location = new System.Drawing.Point(4, 27);
+            this.userTab.Name = "userTab";
+            this.userTab.Padding = new System.Windows.Forms.Padding(3);
+            this.userTab.Size = new System.Drawing.Size(1126, 660);
+            this.userTab.TabIndex = 2;
+            this.userTab.Text = "User";
+            this.userTab.UseVisualStyleBackColor = true;
+            // 
+            // findBtn
+            // 
+            this.findBtn.Location = new System.Drawing.Point(243, 57);
+            this.findBtn.Name = "findBtn";
+            this.findBtn.Size = new System.Drawing.Size(75, 23);
+            this.findBtn.TabIndex = 1;
+            this.findBtn.Text = "findBtn";
+            this.findBtn.UseVisualStyleBackColor = true;
+            this.findBtn.Click += new System.EventHandler(this.findBtn_Click);
             // 
             // aboutLbl
             // 
@@ -603,33 +645,40 @@
             this.aboutLbl.BackColor = System.Drawing.Color.White;
             this.aboutLbl.Location = new System.Drawing.Point(1122, 4);
             this.aboutLbl.Name = "aboutLbl";
-            this.aboutLbl.Size = new System.Drawing.Size(32, 15);
+            this.aboutLbl.Size = new System.Drawing.Size(39, 18);
             this.aboutLbl.TabIndex = 27;
             this.aboutLbl.Text = "v.2.2";
             this.aboutLbl.Click += new System.EventHandler(this.aboutLbl_Click);
             // 
-            // exportBtn
+            // userSearchText
             // 
-            this.exportBtn.Location = new System.Drawing.Point(228, 562);
-            this.exportBtn.Name = "exportBtn";
-            this.exportBtn.Size = new System.Drawing.Size(100, 33);
-            this.exportBtn.TabIndex = 57;
-            this.exportBtn.Text = "Export CSV";
-            this.exportBtn.UseVisualStyleBackColor = true;
-            this.exportBtn.Click += new System.EventHandler(this.exportBtn_Click);
+            this.userSearchText.Location = new System.Drawing.Point(22, 56);
+            this.userSearchText.Name = "userSearchText";
+            this.userSearchText.Size = new System.Drawing.Size(215, 24);
+            this.userSearchText.TabIndex = 2;
+            // 
+            // userListBox
+            // 
+            this.userListBox.FormattingEnabled = true;
+            this.userListBox.ItemHeight = 18;
+            this.userListBox.Location = new System.Drawing.Point(22, 86);
+            this.userListBox.Name = "userListBox";
+            this.userListBox.Size = new System.Drawing.Size(162, 238);
+            this.userListBox.TabIndex = 3;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.ClientSize = new System.Drawing.Size(1158, 741);
             this.Controls.Add(this.aboutLbl);
-            this.Controls.Add(this.mainTabsControl);
+            this.Controls.Add(this.MainTabPage);
             this.Controls.Add(this.returnResultsLbl);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximumSize = new System.Drawing.Size(1920, 1080);
             this.MinimumSize = new System.Drawing.Size(500, 500);
@@ -639,12 +688,14 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.mainTabsControl.ResumeLayout(false);
+            this.MainTabPage.ResumeLayout(false);
             this.onePCTab.ResumeLayout(false);
             this.onePCTab.PerformLayout();
             this.multiPCTab.ResumeLayout(false);
             this.multiPCTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.userTab.ResumeLayout(false);
+            this.userTab.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -658,7 +709,7 @@
         private System.Windows.Forms.Label returnResultsLbl;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem userPassStoreToolStripMenuItem;
-        private System.Windows.Forms.TabControl mainTabsControl;
+        private System.Windows.Forms.TabControl MainTabPage;
         private System.Windows.Forms.TabPage onePCTab;
         private System.Windows.Forms.CheckBox hddCB;
         private System.Windows.Forms.Label label7;
@@ -695,9 +746,13 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox officeCB;
-        private System.Windows.Forms.CheckBox esetCB;
+        private System.Windows.Forms.CheckBox antivirusCB;
         private System.Windows.Forms.Label errorLbl;
         private System.Windows.Forms.Button exportBtn;
+        private System.Windows.Forms.TabPage userTab;
+        private System.Windows.Forms.Button findBtn;
+        private System.Windows.Forms.TextBox userSearchText;
+        private System.Windows.Forms.ListBox userListBox;
     }
 }
 

@@ -12,7 +12,7 @@ Enter network level admin credentials to pull data. If you are on the same domai
 computers you are looking for, no need to supply domain switch.
 
 Enhancements to think about.
--Ping Machine prior to CMD call to see if it is up.
--Pull mulitple machines to a grid style view.
--Proper overlay instead of not responding.
+DONE -Ping Machine prior to CMD call to see if it is up.
+DONE -Pull mulitple machines to a grid style view.
+DONE -Proper overlay instead of not responding.
 -Dump data in to a database directly.
