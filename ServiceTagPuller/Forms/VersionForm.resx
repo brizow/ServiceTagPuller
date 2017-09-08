@@ -118,7 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Rev 2.2 - 6/7/2017
+    <value>Rev 2.3 - 9/8/2017
+-Added User Tab - Get AD Groups from a specific user.
+-Added a copy button for the multi PC section.
+-Further code revision. More is needed.
+
+Rev 2.2 - 6/7/2017
 -Revised multi PC.
 -Fixed multiple PC list updating from AD.
 -Broke out software options individually. 

@@ -77,6 +77,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Management" />
     <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -93,15 +94,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileExporter.cs" />
+    <Compile Include="class files\FileExporter.cs" />
+    <Compile Include="class files\GetADGroups.cs" />
     <Compile Include="Forms\Main Form\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Main Form\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GetADItems.cs" />
-    <Compile Include="OpenCommandPrompt.cs" />
+    <Compile Include="class files\GetADItems.cs" />
+    <Compile Include="class files\OpenCommandPrompt.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Prompt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

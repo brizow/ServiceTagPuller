@@ -6,6 +6,8 @@ using System.DirectoryServices;
 using System.Linq;
 using ServiceTagPuller.Properties;
 using System.Text;
+using System.DirectoryServices.AccountManagement;
+using ServiceTagPuller.class_files;
 
 namespace ServiceTagPuller
 {
@@ -271,6 +273,19 @@ namespace ServiceTagPuller
             }
         }
 
+        private void copySelectedBtn_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItems.Count > 0)
+            {
+                string s = "";
+                foreach (object o in listBox1.SelectedItems)
+                {
+                    s += o.ToString();
+                }
+                Clipboard.SetText(s);
+            }
+        }
+
         private void getDetailsBtn_Click(object sender, EventArgs e)
         {
             if (listBox1.SelectedItems.Count > 5)
@@ -288,18 +303,12 @@ namespace ServiceTagPuller
                 //CSV export
                 var csv = new StringBuilder();
 
-                //string a list of computers from the list box
-                //List<string> computersToExport = new List<string>();
-
                 //go through each of the returned results
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    ////check the result for blanks - don't add them
-                    if(row.Cells[0].Value != "")
-                    {
-                        //computersToExport.Add(row.ToString());
-                        csv.AppendLine(row.Cells[0].Value.ToString());
-                    }  
+                    string result = row.Cells[0].Value.ToString();
+                    result.Replace("Node", string.Empty);
+                    csv.AppendLine(result); 
                 }
 
                 try
@@ -308,7 +317,7 @@ namespace ServiceTagPuller
                     string saveResults = csv.ToString();
 
                     SaveFileDialog saveFile = new SaveFileDialog();
-                    saveFile.FileName = "ExportResults.csv";
+                    saveFile.FileName = "PCDetailExportResults.csv";
                     //open the save file prompt
                     if (saveFile.ShowDialog() == DialogResult.OK)
                     {
@@ -486,25 +495,64 @@ namespace ServiceTagPuller
 
         #endregion
 
+        #region UserTab
         private void findBtn_Click(object sender, EventArgs e)
         {
+            GetADGroups getADGroups = new GetADGroups();
             string userSearch = userSearchText.Text;
             userListBox.Items.Clear();
 
             try
             {
-                var users = GetADItems.GetADGroups(Settings.Default.Domain, userSearch);
-                //put it in the list
-                foreach (var user in users)
-                {
-                    userListBox.Items.Add(user);
-                }
+                foreach (var grp in getADGroups.GetGroups(userSearch))
+                userListBox.Items.Add(grp);
             }
             catch
             {
-
+                
             }
         }
+
+        private void exportADGroupBtn_Click(object sender, EventArgs e)
+        {
+            string userSearch = userSearchText.Text;
+
+            if (userListBox.Items != null)
+            {
+                var csv = new StringBuilder();
+
+                //go through each of the returned results
+                foreach (var lvi in userListBox.Items)
+                {
+                        csv.AppendLine(lvi.ToString());
+                }
+
+                try
+                {
+                    //string out the results
+                    string saveResults = csv.ToString();
+
+                    SaveFileDialog saveFile = new SaveFileDialog();
+                    saveFile.FileName = userSearch + "ADGroups.csv";
+                    //open the save file prompt
+                    if (saveFile.ShowDialog() == DialogResult.OK)
+                    {
+                        if (saveFile.FileName != "")
+                        {
+                            //SAVE IT!
+                            File.WriteAllText(saveFile.FileName, saveResults);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    errorLbl.Text = ex.Message;
+                }
+            }
+        }
+        #endregion
+
+        
     }
 }
 

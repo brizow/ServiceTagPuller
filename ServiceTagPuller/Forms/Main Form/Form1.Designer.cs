@@ -61,7 +61,6 @@
             this.multiPCTab = new System.Windows.Forms.TabPage();
             this.errorLbl = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.exportBtn = new System.Windows.Forms.Button();
             this.softwareCBMulti = new System.Windows.Forms.CheckBox();
             this.hddCBMulti = new System.Windows.Forms.CheckBox();
             this.currUserCBMulti = new System.Windows.Forms.CheckBox();
@@ -76,10 +75,15 @@
             this.findMachineBtn = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.userTab = new System.Windows.Forms.TabPage();
+            this.userListBox = new System.Windows.Forms.ListBox();
+            this.userSearchText = new System.Windows.Forms.TextBox();
             this.findBtn = new System.Windows.Forms.Button();
             this.aboutLbl = new System.Windows.Forms.Label();
-            this.userSearchText = new System.Windows.Forms.TextBox();
-            this.userListBox = new System.Windows.Forms.ListBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.exportADGroupBtn = new System.Windows.Forms.Button();
+            this.exportBtn = new System.Windows.Forms.Button();
+            this.copySelectedBtn = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.MainTabPage.SuspendLayout();
             this.onePCTab.SuspendLayout();
@@ -412,6 +416,7 @@
             // 
             // multiPCTab
             // 
+            this.multiPCTab.Controls.Add(this.copySelectedBtn);
             this.multiPCTab.Controls.Add(this.errorLbl);
             this.multiPCTab.Controls.Add(this.label10);
             this.multiPCTab.Controls.Add(this.exportBtn);
@@ -454,16 +459,6 @@
             this.label10.Size = new System.Drawing.Size(362, 36);
             this.label10.TabIndex = 59;
             this.label10.Text = "Multiple Machine Details";
-            // 
-            // exportBtn
-            // 
-            this.exportBtn.Location = new System.Drawing.Point(228, 562);
-            this.exportBtn.Name = "exportBtn";
-            this.exportBtn.Size = new System.Drawing.Size(100, 33);
-            this.exportBtn.TabIndex = 57;
-            this.exportBtn.Text = "Export CSV";
-            this.exportBtn.UseVisualStyleBackColor = true;
-            this.exportBtn.Click += new System.EventHandler(this.exportBtn_Click);
             // 
             // softwareCBMulti
             // 
@@ -568,7 +563,7 @@
             // 
             this.selectAllBtn.Location = new System.Drawing.Point(11, 91);
             this.selectAllBtn.Name = "selectAllBtn";
-            this.selectAllBtn.Size = new System.Drawing.Size(75, 23);
+            this.selectAllBtn.Size = new System.Drawing.Size(100, 23);
             this.selectAllBtn.TabIndex = 47;
             this.selectAllBtn.Text = "Select All";
             this.selectAllBtn.UseVisualStyleBackColor = true;
@@ -589,7 +584,7 @@
             // 
             // getDetailsBtn
             // 
-            this.getDetailsBtn.Location = new System.Drawing.Point(229, 601);
+            this.getDetailsBtn.Location = new System.Drawing.Point(228, 322);
             this.getDetailsBtn.Name = "getDetailsBtn";
             this.getDetailsBtn.Size = new System.Drawing.Size(100, 33);
             this.getDetailsBtn.TabIndex = 45;
@@ -618,6 +613,9 @@
             // 
             // userTab
             // 
+            this.userTab.Controls.Add(this.label9);
+            this.userTab.Controls.Add(this.exportADGroupBtn);
+            this.userTab.Controls.Add(this.label6);
             this.userTab.Controls.Add(this.userListBox);
             this.userTab.Controls.Add(this.userSearchText);
             this.userTab.Controls.Add(this.findBtn);
@@ -629,13 +627,29 @@
             this.userTab.Text = "User";
             this.userTab.UseVisualStyleBackColor = true;
             // 
+            // userListBox
+            // 
+            this.userListBox.FormattingEnabled = true;
+            this.userListBox.ItemHeight = 18;
+            this.userListBox.Location = new System.Drawing.Point(22, 86);
+            this.userListBox.Name = "userListBox";
+            this.userListBox.Size = new System.Drawing.Size(215, 238);
+            this.userListBox.TabIndex = 3;
+            // 
+            // userSearchText
+            // 
+            this.userSearchText.Location = new System.Drawing.Point(22, 56);
+            this.userSearchText.Name = "userSearchText";
+            this.userSearchText.Size = new System.Drawing.Size(215, 24);
+            this.userSearchText.TabIndex = 2;
+            // 
             // findBtn
             // 
-            this.findBtn.Location = new System.Drawing.Point(243, 57);
+            this.findBtn.Location = new System.Drawing.Point(243, 56);
             this.findBtn.Name = "findBtn";
-            this.findBtn.Size = new System.Drawing.Size(75, 23);
+            this.findBtn.Size = new System.Drawing.Size(75, 24);
             this.findBtn.TabIndex = 1;
-            this.findBtn.Text = "findBtn";
+            this.findBtn.Text = "Find";
             this.findBtn.UseVisualStyleBackColor = true;
             this.findBtn.Click += new System.EventHandler(this.findBtn_Click);
             // 
@@ -647,24 +661,56 @@
             this.aboutLbl.Name = "aboutLbl";
             this.aboutLbl.Size = new System.Drawing.Size(39, 18);
             this.aboutLbl.TabIndex = 27;
-            this.aboutLbl.Text = "v.2.2";
+            this.aboutLbl.Text = "v.2.3";
             this.aboutLbl.Click += new System.EventHandler(this.aboutLbl_Click);
             // 
-            // userSearchText
+            // label6
             // 
-            this.userSearchText.Location = new System.Drawing.Point(22, 56);
-            this.userSearchText.Name = "userSearchText";
-            this.userSearchText.Size = new System.Drawing.Size(215, 24);
-            this.userSearchText.TabIndex = 2;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(19, 14);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(82, 18);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "AD Groups";
             // 
-            // userListBox
+            // exportADGroupBtn
             // 
-            this.userListBox.FormattingEnabled = true;
-            this.userListBox.ItemHeight = 18;
-            this.userListBox.Location = new System.Drawing.Point(22, 86);
-            this.userListBox.Name = "userListBox";
-            this.userListBox.Size = new System.Drawing.Size(162, 238);
-            this.userListBox.TabIndex = 3;
+            this.exportADGroupBtn.Location = new System.Drawing.Point(243, 300);
+            this.exportADGroupBtn.Name = "exportADGroupBtn";
+            this.exportADGroupBtn.Size = new System.Drawing.Size(75, 24);
+            this.exportADGroupBtn.TabIndex = 5;
+            this.exportADGroupBtn.Text = "Export";
+            this.exportADGroupBtn.UseVisualStyleBackColor = true;
+            this.exportADGroupBtn.Click += new System.EventHandler(this.exportADGroupBtn_Click);
+            // 
+            // exportBtn
+            // 
+            this.exportBtn.Location = new System.Drawing.Point(229, 595);
+            this.exportBtn.Name = "exportBtn";
+            this.exportBtn.Size = new System.Drawing.Size(100, 33);
+            this.exportBtn.TabIndex = 57;
+            this.exportBtn.Text = "Export CSV";
+            this.exportBtn.UseVisualStyleBackColor = true;
+            this.exportBtn.Click += new System.EventHandler(this.exportBtn_Click);
+            // 
+            // copySelectedBtn
+            // 
+            this.copySelectedBtn.Location = new System.Drawing.Point(122, 91);
+            this.copySelectedBtn.Name = "copySelectedBtn";
+            this.copySelectedBtn.Size = new System.Drawing.Size(100, 23);
+            this.copySelectedBtn.TabIndex = 61;
+            this.copySelectedBtn.Text = "Copy";
+            this.copySelectedBtn.UseVisualStyleBackColor = true;
+            this.copySelectedBtn.Click += new System.EventHandler(this.copySelectedBtn_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(19, 35);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(172, 18);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "Enter Domain Username";
             // 
             // Form1
             // 
@@ -748,11 +794,15 @@
         private System.Windows.Forms.CheckBox officeCB;
         private System.Windows.Forms.CheckBox antivirusCB;
         private System.Windows.Forms.Label errorLbl;
-        private System.Windows.Forms.Button exportBtn;
         private System.Windows.Forms.TabPage userTab;
         private System.Windows.Forms.Button findBtn;
         private System.Windows.Forms.TextBox userSearchText;
         private System.Windows.Forms.ListBox userListBox;
+        private System.Windows.Forms.Button exportADGroupBtn;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button copySelectedBtn;
+        private System.Windows.Forms.Button exportBtn;
+        private System.Windows.Forms.Label label9;
     }
 }
 
