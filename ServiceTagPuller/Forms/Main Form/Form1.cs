@@ -148,6 +148,16 @@ namespace ServiceTagPuller
                                 webBrowser1.Document.GetElementById("divOS").InnerHtml = "";
                             }
 
+                            if (macCB.Checked)
+                            {
+                                command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " nicconfig get IPAddress /format:htable";
+                                webBrowser1.Document.GetElementById("divMAC").InnerHtml = openCommandPrompt.SendCommand(command);
+                            }
+                            else
+                            {
+                                webBrowser1.Document.GetElementById("divMAC").InnerHtml = "";
+                            }
+
                             if (adobeCB.Checked)
                             {
                                 string filter = "\"Name like 'Adobe%'\"";

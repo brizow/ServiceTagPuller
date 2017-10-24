@@ -18,7 +18,7 @@ namespace ServiceTagPuller.class_files
             // if found - grab its groups
             if (user != null)
             {
-                PrincipalSearchResult<Principal> groups = user.GetAuthorizationGroups();
+                PrincipalSearchResult<Principal> groups = user.GetGroups();
 
                 // iterate over all groups
                 foreach (Principal p in groups)

@@ -14,6 +14,7 @@ namespace ServiceTagPuller
                 //push saved settings in to place
                 userNameTB.Text = Settings.Default.UserName;
                 passwordTB.Text = Settings.Default.Password;
+                domainTB.Text = Settings.Default.Domain;
             }
         }
 
