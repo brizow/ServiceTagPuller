@@ -140,7 +140,7 @@ namespace ServiceTagPuller
 
                             if (osInfoCB.Checked)
                             {
-                                command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " os get SerialNumber, OSArchitecture, Caption /format:htable";
+                                command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " os get SerialNumber, OSArchitecture, Caption, Version /format:htable";
                                 webBrowser1.Document.GetElementById("divOS").InnerHtml = openCommandPrompt.SendCommand(command);
                             }
                             else
@@ -420,7 +420,7 @@ namespace ServiceTagPuller
 
                                 if (osCBMulti.Checked)
                                 {
-                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " os get SerialNumber, OSArchitecture, Caption /format:csv";
+                                    command = "wmic /user:" + username + " /password:" + password + " /node:" + computer + " os get SerialNumber, OSArchitecture, Caption, Version /format:csv";
                                     returnedResults.Add(openCommandPrompt.SendCommand(command));
                                 }
                                 if (softwareCBMulti.Checked)

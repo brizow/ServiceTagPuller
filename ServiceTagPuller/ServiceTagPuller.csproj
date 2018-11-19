@@ -56,10 +56,10 @@
     <StartupObject>ServiceTagPuller.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>C2F6EE2C95437C993D8C0C48D861302A728A4ACB</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>DCC74F9D469642CD3FA5B8B11C56A2E4A7B929B8</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>ServiceTagPuller_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>ServiceTagPuller_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -71,7 +71,10 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -148,6 +151,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="ServiceTagPuller_1_TemporaryKey.pfx" />
     <None Include="ServiceTagPuller_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

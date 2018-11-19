@@ -720,11 +720,11 @@
             // 
             this.aboutLbl.AutoSize = true;
             this.aboutLbl.BackColor = System.Drawing.Color.White;
-            this.aboutLbl.Location = new System.Drawing.Point(1122, 4);
+            this.aboutLbl.Location = new System.Drawing.Point(1104, 4);
             this.aboutLbl.Name = "aboutLbl";
-            this.aboutLbl.Size = new System.Drawing.Size(39, 18);
+            this.aboutLbl.Size = new System.Drawing.Size(51, 18);
             this.aboutLbl.TabIndex = 27;
-            this.aboutLbl.Text = "v.2.3";
+            this.aboutLbl.Text = "v.2.3.1";
             this.aboutLbl.Click += new System.EventHandler(this.aboutLbl_Click);
             // 
             // Form1
