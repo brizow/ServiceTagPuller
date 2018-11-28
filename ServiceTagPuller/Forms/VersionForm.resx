@@ -118,7 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Rev 2.3.1 - 11/1/17
+    <value>Rev 2.3.2 - 11/28/2018
+-Fixed broken HTML listing after transfer to new computer.
+
+Rev 2.3.1 - 11/1/17
 -Added OS Build Version to returned results.
 
 Rev 2.3 - 9/8/17
